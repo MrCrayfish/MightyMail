@@ -1,7 +1,7 @@
 {
   "parent": "mighty_mail:block/mail_box",
   "textures": {
-    "particle": "mighty_mail:block/cherry_particle",
+    "particle": "minecraft:block/cherry_planks",
     "texture": "mighty_mail:block/cherry_mail_box"
   }
 }

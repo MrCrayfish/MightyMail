@@ -1,7 +1,7 @@
 {
 	"credit": "Model by MrCrayfish (https://twitter.com/MrCrayfish) using Blockbench. All Rights Reserved.",
 	"textures": {
-		"particle": "mighty_mail:block/light_particle",
+		"particle": "minecraft:block/iron_block",
 		"texture": "mighty_mail:block/post_box"
 	},
 	"elements": [

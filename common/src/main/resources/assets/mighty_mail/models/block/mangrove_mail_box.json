@@ -1,7 +1,7 @@
 {
   "parent": "mighty_mail:block/mail_box",
   "textures": {
-    "particle": "mighty_mail:block/mangrove_particle",
+    "particle": "minecraft:block/mangrove_planks",
     "texture": "mighty_mail:block/mangrove_mail_box"
   }
 }

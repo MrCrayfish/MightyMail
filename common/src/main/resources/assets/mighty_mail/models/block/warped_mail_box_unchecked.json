@@ -1,7 +1,7 @@
 {
   "parent": "mighty_mail:block/mail_box_unchecked",
   "textures": {
-    "particle": "mighty_mail:block/warped_particle",
+    "particle": "minecraft:block/warped_planks",
     "texture": "mighty_mail:block/warped_mail_box"
   }
 }
