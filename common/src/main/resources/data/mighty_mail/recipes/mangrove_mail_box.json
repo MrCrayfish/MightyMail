@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:chest"
+    },
+    "F": {
+      "item": "minecraft:mangrove_fence"
+    },
+    "P": {
+      "item": "minecraft:mangrove_planks"
+    },
+    "S": {
+      "item": "minecraft:mangrove_slab"
+    }
+  },
+  "pattern": [
+    "SSS",
+    "PCP",
+    " F "
+  ],
+  "result": {
+    "item": "mighty_mail:mangrove_mail_box"
+  },
+  "show_notification": true
+}
