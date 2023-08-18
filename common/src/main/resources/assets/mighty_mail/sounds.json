@@ -1,0 +1,9 @@
+{
+    "item.package.open": {
+        "subtitle": "subtitle.mighty_mail.package_open",
+        "sounds": [
+            "mighty_mail:item/package/open1",
+            "mighty_mail:item/package/open2"
+        ]
+    }
+}

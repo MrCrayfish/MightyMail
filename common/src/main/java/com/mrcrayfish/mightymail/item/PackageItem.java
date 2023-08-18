@@ -4,12 +4,14 @@ import com.mrcrayfish.framework.api.Environment;
 import com.mrcrayfish.framework.api.util.EnvironmentHelper;
 import com.mrcrayfish.mightymail.client.util.ScreenHelper;
 import com.mrcrayfish.mightymail.core.ModItems;
+import com.mrcrayfish.mightymail.core.ModSounds;
 import com.mrcrayfish.mightymail.util.Utils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.Containers;
@@ -65,6 +67,8 @@ public class PackageItem extends Item
         ItemStack stack = player.getItemInHand(hand);
         if(!level.isClientSide())
         {
+            float pitch = 0.9F + 0.2F * level.random.nextFloat();
+            level.playSound(null, player.getX(), player.getY(), player.getZ(), ModSounds.ITEM_PACKAGE_OPEN.get(), SoundSource.PLAYERS, 1.0F, pitch);
             getPackagedItems(stack).forEach(s -> Containers.dropItemStack(level, player.getX(), player.getY(), player.getZ(), s));
             player.setItemInHand(hand, ItemStack.EMPTY);
         }
