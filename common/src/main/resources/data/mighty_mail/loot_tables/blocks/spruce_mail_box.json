@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "mighty_mail:spruce_mail_box"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "mighty_mail:blocks/spruce_mail_box"
+}

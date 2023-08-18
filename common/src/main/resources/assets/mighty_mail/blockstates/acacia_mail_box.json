@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "enabled=false,facing=east": {
+      "model": "mighty_mail:block/acacia_mail_box",
+      "y": 90
+    },
+    "enabled=false,facing=north": {
+      "model": "mighty_mail:block/acacia_mail_box"
+    },
+    "enabled=false,facing=south": {
+      "model": "mighty_mail:block/acacia_mail_box",
+      "y": 180
+    },
+    "enabled=false,facing=west": {
+      "model": "mighty_mail:block/acacia_mail_box",
+      "y": 270
+    },
+    "enabled=true,facing=east": {
+      "model": "mighty_mail:block/acacia_mail_box_unchecked",
+      "y": 90
+    },
+    "enabled=true,facing=north": {
+      "model": "mighty_mail:block/acacia_mail_box_unchecked"
+    },
+    "enabled=true,facing=south": {
+      "model": "mighty_mail:block/acacia_mail_box_unchecked",
+      "y": 180
+    },
+    "enabled=true,facing=west": {
+      "model": "mighty_mail:block/acacia_mail_box_unchecked",
+      "y": 270
+    }
+  }
+}

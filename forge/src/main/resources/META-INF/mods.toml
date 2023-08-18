@@ -38,4 +38,4 @@ description="${mod_desc}"
 [modproperties."${mod_id}"]
     catalogueImageIcon="${mod_id}_icon.png"
     catalogueBackground="${mod_id}_background.png"
-    configuredBackground="minecraft:textures/block/stone.png"
+    configuredBackground="minecraft:textures/block/stripped_oak_log.png"

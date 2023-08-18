@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "mighty_mail:block/post_box",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "mighty_mail:block/post_box"
+    },
+    "facing=south": {
+      "model": "mighty_mail:block/post_box",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "mighty_mail:block/post_box",
+      "y": 270
+    }
+  }
+}

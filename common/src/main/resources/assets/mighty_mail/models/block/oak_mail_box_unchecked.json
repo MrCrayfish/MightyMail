@@ -1,0 +1,7 @@
+{
+  "parent": "mighty_mail:block/mail_box_unchecked",
+  "textures": {
+    "particle": "mighty_mail:block/oak_particle",
+    "texture": "mighty_mail:block/oak_mail_box"
+  }
+}

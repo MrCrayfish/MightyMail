@@ -1,0 +1,7 @@
+{
+  "parent": "mighty_mail:block/mail_box",
+  "textures": {
+    "particle": "mighty_mail:block/dark_oak_particle",
+    "texture": "mighty_mail:block/dark_oak_mail_box"
+  }
+}

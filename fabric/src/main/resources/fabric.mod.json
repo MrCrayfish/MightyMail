@@ -15,14 +15,12 @@
     "environment": "*",
     "entrypoints": {
         "main": [
-            "com.example.examplemod.ExampleMod"
+            "com.mrcrayfish.mightymail.MightyMail"
         ],
-        "client": []
+        "client": [
+            "com.mrcrayfish.mightymail.client.ClientHandler"
+        ]
     },
-    "mixins": [
-        "${mod_id}.fabric.mixins.json",
-        "${mod_id}.common.mixins.json"
-    ],
     "depends": {
         "fabricloader": ">=${fabric_loader_version}",
         "fabric": "*",
@@ -33,11 +31,19 @@
     "custom": {
         "configured": {
             "configs": [],
-            "background": "minecraft:textures/block/dirt.png"
+            "background": "minecraft:textures/block/stripped_oak_log.png"
         },
         "catalogue": {
             "banner": "${mod_id}_banner.png",
             "background": "${mod_id}_background.png"
+        },
+        "framework": {
+            "containers": [
+                "com.mrcrayfish.mightymail.core"
+            ],
+            "configs": [
+                "com.mrcrayfish.mightymail.Config"
+            ]
         }
     }
 }
