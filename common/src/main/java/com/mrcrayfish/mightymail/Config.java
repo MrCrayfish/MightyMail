@@ -16,7 +16,7 @@ public class Config
     public static class Server
     {
         @ConfigProperty(name = "mailboxInventoryRows", comment = "The maximum amount of items that can be queued for delivery for a mail box")
-        public final IntProperty mailboxInventoryRows = IntProperty.create(1);
+        public final IntProperty mailboxInventoryRows = IntProperty.create(1, 1, 6);
 
         @ConfigProperty(name = "mailQueueSize", comment = "The maximum amount of items that can be queued for delivery for a mail box")
         public final IntProperty mailQueueSize = IntProperty.create(18);
