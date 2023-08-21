@@ -28,6 +28,9 @@
         "java": ">=17",
         "framework": ">=${framework_version}"
     },
+    "conflicts": {
+        "refurbished_furniture": ">=1.0.0"
+    },
     "custom": {
         "configured": {
             "configs": [],
