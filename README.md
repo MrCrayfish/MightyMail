@@ -1,25 +1,11 @@
-# MultiLoader Template
+![mighty_mail_banner](https://github.com/MrCrayfish/MightyMail/assets/4958241/30184a85-3142-49dd-b5df-0880f6fb70d1)
 
-This project provides a Gradle project template that can compile mods for both Forge and Fabric using a common sourceset. This project does not require any third party libraries or dependencies. If you have any questions or want to discuss the project join our [Discord](https://discord.myceliummod.network).
+# Mighty Mail
 
-## Getting Started
+Mighty Mail is standalone version of the mailing system in the upcoming refurbished MrCrayfish's Furniture Mod. The mailing system has a versatile use, and deserves it's own mod. In this mod. you'll find a post box and mailboxes available in every wood type. A post box allows you to send mail to other players on your server. You can include items and an optional message which is sent in the form of a package to any mailbox placed in the world. It also works across dimensions. When you receive mail, you mailbox will appear with a little red flag. To customise your experience, there are config options to change the inventory size of the mailboxes and increase the maximum delivery queue limit.
 
-## IntelliJ IDEA
-This guide will show how to import the MultiLoader Template into IntelliJ IDEA. The setup process is roughly equivalent to setting up Forge and Fabric independently and should be very familiar to anyone who has worked with their MDKs.
+## Screenshots
+![Screenshot1(1)](https://github.com/MrCrayfish/MightyMail/assets/4958241/94570625-d676-4fa0-a10f-45c08ae7bb02)
+![Screenshot2(1)](https://github.com/MrCrayfish/MightyMail/assets/4958241/e2d78020-577e-40bd-8f39-fea2a3b860f7)
+![Screenshot3(1)](https://github.com/MrCrayfish/MightyMail/assets/4958241/31f3be26-75ab-4da3-9539-e50091ef89a7)
 
-1. Clone or download this repository to your computer.
-2. Configure the project by editing the `group`, `mod_name`, `mod_author`, and `mod_id` properties in the `gradle.properties` file. You will also need to change the `rootProject.name`  property in `settings.gradle`, this should match the folder name of your project, or else IDEA may complain.
-3. Open the template's root folder as a new project in IDEA. This is the folder that contains this README file and the gradlew executable.
-4. If your default JVM/JDK is not Java 17 you will encounter an error when opening the project. This error is fixed by going to `File > Settings > Build, Execution, Deployment > Build Tools > Gradle > Gradle JVM`and changing the value to a valid Java 17 JVM. You will also need to set the Project SDK to Java 17. This can be done by going to `File > Project Structure > Project SDK`. Once both have been set open the Gradle tab in IDEA and click the refresh button to reload the project.
-5. Open the Gradle tab in IDEA if it has not already been opened. Navigate to `Your Project > Common > Tasks > vanilla gradle > decompile`. Run this task to decompile Minecraft.
-6. Open the Gradle tab in IDEA if it has not already been opened. Navigate to `Your Project > Forge > Tasks > forgegradle runs > genIntellijRuns`. Run this task to set up run configurations for Forge.
-7. Open your Run/Debug Configurations. Under the Application category there should now be options to run Forge and Fabric projects. Select one of the client options and try to run it.
-8. Assuming you were able to run the game in step 7 your workspace should now be set up.
-
-### Eclipse
-While it is possible to use this template in Eclipse it is not recommended. During the development of this template multiple critical bugs and quirks related to Eclipse were found at nearly every level of the required build tools. While we continue to work with these tools to report and resolve issues support for projects like these are not there yet. For now Eclipse is considered unsupported by this project. The development cycle for build tools is notoriously slow so there are no ETAs available.
-
-## Development Guide
-When using this template the majority of your mod is developed in the Common project. The Common project is compiled against the vanilla game and is used to hold code that is shared between the different loader-specific versions of your mod. The Common project has no knowledge or access to ModLoader specific code, apis, or concepts. Code that requires something from a specific loader must be done through the project that is specific to that loader, such as the Forge or Fabric project.
-
-Loader specific projects such as the Forge and Fabric project are used to load the Common project into the game. These projects also define code that is specific to that loader. Loader specific projects can access all of the code in the Common project. It is important to remember that the Common project can not access code from loader specific projects.
