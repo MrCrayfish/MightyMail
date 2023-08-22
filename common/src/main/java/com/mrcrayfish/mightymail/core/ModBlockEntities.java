@@ -22,7 +22,6 @@ public class ModBlockEntities
             ModBlocks.MAIL_BOX_ACACIA.get(),
             ModBlocks.MAIL_BOX_DARK_OAK.get(),
             ModBlocks.MAIL_BOX_MANGROVE.get(),
-            ModBlocks.MAIL_BOX_CHERRY.get(),
             ModBlocks.MAIL_BOX_CRIMSON.get(),
             ModBlocks.MAIL_BOX_WARPED.get()
     });

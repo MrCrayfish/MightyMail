@@ -12,7 +12,6 @@ import net.minecraft.client.renderer.RenderType;
  */
 public class ClientHandler
 {
-    @SuppressWarnings("deprecation")
     public static void setup()
     {
         MenuScreens.register(ModMenuTypes.POST_BOX.get(), PostBoxScreen::new);
@@ -23,7 +22,6 @@ public class ClientHandler
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.MAIL_BOX_ACACIA.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.MAIL_BOX_DARK_OAK.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.MAIL_BOX_MANGROVE.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(ModBlocks.MAIL_BOX_CHERRY.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.MAIL_BOX_CRIMSON.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.MAIL_BOX_WARPED.get(), RenderType.cutout());
     }
