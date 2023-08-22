@@ -28,7 +28,7 @@ public class ServerPlayHandler
             return;
 
         DeliveryService.get(player.server).ifPresent(service -> {
-            if(!service.renameMailbox(player, player.level(), message.getPos(), message.getName())) {
+            if(!service.renameMailbox(player, player.level, message.getPos(), message.getName())) {
                 player.sendSystemMessage(Utils.translation("gui", "rename_mailbox_failed"));
             }
         });

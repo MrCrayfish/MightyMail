@@ -1,7 +1,8 @@
 package com.mrcrayfish.mightymail.client.gui.widget;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.gui.GuiGraphics;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipPositioner;
 import net.minecraft.client.gui.screens.inventory.tooltip.DefaultTooltipPositioner;
@@ -34,19 +35,20 @@ public class IconButton extends Button
     }
 
     @Override
-    public void renderWidget(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks)
+    public void renderWidget(PoseStack poseStack, int mouseX, int mouseY, float partialTicks)
     {
-        super.renderWidget(graphics, mouseX, mouseY, partialTicks);
+        super.renderWidget(poseStack, mouseX, mouseY, partialTicks);
         int contentLeft = (this.width - this.iconWidth) / 2;
         int contentTop = (this.height - this.iconHeight) / 2;
         int iconX = this.getX() + contentLeft;
         int iconY = this.getY() + contentTop;
         float brightness = this.active ? 1.0F : 0.5F;
         RenderSystem.enableBlend();
-        graphics.setColor(brightness, brightness, brightness, this.alpha);
-        graphics.blit(this.texture, iconX, iconY, this.iconU, this.iconV, this.iconWidth, this.iconHeight, this.sourceWidth, this.sourceHeight);
+        RenderSystem.setShaderTexture(0, this.texture);
+        RenderSystem.setShaderColor(brightness, brightness, brightness, this.alpha);
+        GuiComponent.blit(poseStack, iconX, iconY, this.iconU, this.iconV, this.iconWidth, this.iconHeight, this.sourceWidth, this.sourceHeight);
         RenderSystem.disableBlend();
-        graphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
     }
 
     @Override
