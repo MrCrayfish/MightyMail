@@ -94,7 +94,7 @@ public class PostBoxMenu extends AbstractContainerMenu
             }
             if(slotStack.isEmpty())
             {
-                slot.setByPlayer(ItemStack.EMPTY);
+                slot.set(ItemStack.EMPTY);
             }
             else
             {

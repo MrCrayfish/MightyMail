@@ -22,7 +22,7 @@ public class Bootstrap
         TickEvents.START_SERVER.register(server -> DeliveryService.get(server).ifPresent(DeliveryService::serverTick));
         DispenserBlock.registerBehavior(ModItems.PACKAGE::get, (source, stack) -> {
             Direction direction = source.getBlockState().getValue(DispenserBlock.FACING);
-            Vec3 pos = source.getPos().relative(direction).getCenter();
+            Vec3 pos = Vec3.atCenterOf(source.getPos().relative(direction));
             PackageItem.getPackagedItems(stack).forEach(s -> {
                 Containers.dropItemStack(source.getLevel(), pos.x, pos.y, pos.z, s);
             });

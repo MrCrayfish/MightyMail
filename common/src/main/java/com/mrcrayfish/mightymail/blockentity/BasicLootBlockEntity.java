@@ -94,7 +94,7 @@ public abstract class BasicLootBlockEntity extends RandomizableContainerBlockEnt
     @Override
     public boolean canTakeItemThroughFace(int slotIndex, ItemStack stack, Direction direction)
     {
-        return this.canTakeItem(this, slotIndex, stack);
+        return true;
     }
 
     /**

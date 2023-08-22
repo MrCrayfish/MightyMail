@@ -4,8 +4,6 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipPositioner;
-import net.minecraft.client.gui.screens.inventory.tooltip.DefaultTooltipPositioner;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.resources.ResourceLocation;
 
@@ -24,7 +22,7 @@ public class IconButton extends Button
 
     public IconButton(int x, int y, int iconU, int iconV, int iconWidth, int iconHeight, ResourceLocation texture, int sourceWidth, int sourceHeight, OnPress onPress)
     {
-        super(x, y, 18, 18, CommonComponents.EMPTY, onPress, DEFAULT_NARRATION);
+        super(x, y, 18, 18, CommonComponents.EMPTY, onPress);
         this.iconU = iconU;
         this.iconV = iconV;
         this.iconWidth = iconWidth;
@@ -35,13 +33,13 @@ public class IconButton extends Button
     }
 
     @Override
-    public void renderWidget(PoseStack poseStack, int mouseX, int mouseY, float partialTicks)
+    public void renderButton(PoseStack poseStack, int mouseX, int mouseY, float partialTicks)
     {
-        super.renderWidget(poseStack, mouseX, mouseY, partialTicks);
+        super.renderButton(poseStack, mouseX, mouseY, partialTicks);
         int contentLeft = (this.width - this.iconWidth) / 2;
         int contentTop = (this.height - this.iconHeight) / 2;
-        int iconX = this.getX() + contentLeft;
-        int iconY = this.getY() + contentTop;
+        int iconX = this.x + contentLeft;
+        int iconY = this.y + contentTop;
         float brightness = this.active ? 1.0F : 0.5F;
         RenderSystem.enableBlend();
         RenderSystem.setShaderTexture(0, this.texture);
@@ -49,11 +47,5 @@ public class IconButton extends Button
         GuiComponent.blit(poseStack, iconX, iconY, this.iconU, this.iconV, this.iconWidth, this.iconHeight, this.sourceWidth, this.sourceHeight);
         RenderSystem.disableBlend();
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-    }
-
-    @Override
-    protected ClientTooltipPositioner createTooltipPositioner()
-    {
-        return DefaultTooltipPositioner.INSTANCE;
     }
 }

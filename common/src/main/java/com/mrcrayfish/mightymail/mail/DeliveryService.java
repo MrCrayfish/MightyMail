@@ -5,9 +5,8 @@ import com.mrcrayfish.mightymail.Constants;
 import com.mrcrayfish.mightymail.blockentity.MailboxBlockEntity;
 import com.mrcrayfish.mightymail.network.Network;
 import com.mrcrayfish.mightymail.network.message.MessageUpdateMailboxes;
-import com.mrcrayfish.mightymail.util.Utils;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.registries.Registries;
+import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -292,7 +291,7 @@ public class DeliveryService extends SavedData
             case "minecraft:overworld" -> Level.OVERWORLD;
             case "minecraft:the_nether" -> Level.NETHER;
             case "minecraft:the_end" -> Level.END;
-            default -> ResourceKey.create(Registries.DIMENSION, new ResourceLocation(levelKey));
+            default -> ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(levelKey));
         };
     }
 }

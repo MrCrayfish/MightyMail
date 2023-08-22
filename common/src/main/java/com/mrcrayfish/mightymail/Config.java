@@ -10,7 +10,7 @@ import com.mrcrayfish.framework.api.config.IntProperty;
  */
 public class Config
 {
-    @FrameworkConfig(id = Constants.MOD_ID, name = "server", type = ConfigType.SERVER)
+    @FrameworkConfig(id = Constants.MOD_ID, name = "server", type = ConfigType.SERVER_SYNC)
     public static final Server SERVER = new Server();
 
     public static class Server

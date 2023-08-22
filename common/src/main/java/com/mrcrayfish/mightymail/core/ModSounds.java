@@ -11,5 +11,5 @@ import net.minecraft.sounds.SoundEvent;
 @RegistryContainer
 public class ModSounds
 {
-    public static final RegistryEntry<SoundEvent> ITEM_PACKAGE_OPEN = RegistryEntry.soundEvent(Utils.resource("item.package.open"), id -> () -> SoundEvent.createVariableRangeEvent(id));
+    public static final RegistryEntry<SoundEvent> ITEM_PACKAGE_OPEN = RegistryEntry.soundEvent(Utils.resource("item.package.open"), id -> () -> new SoundEvent(id));
 }
