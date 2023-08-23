@@ -1,5 +1,6 @@
 package com.mrcrayfish.mightymail.inventory;
 
+import com.mrcrayfish.mightymail.blockentity.PostBoxBlockEntity;
 import com.mrcrayfish.mightymail.core.ModMenuTypes;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
@@ -19,7 +20,7 @@ public class PostBoxMenu extends AbstractContainerMenu
 
     public PostBoxMenu(int windowId, Inventory playerInventory)
     {
-        this(windowId, playerInventory, new SimpleContainer(9));
+        this(windowId, playerInventory, new SimpleContainer(PostBoxBlockEntity.CONTAINER_SIZE));
     }
 
     public PostBoxMenu(int windowId, Inventory playerInventory, Container container)
