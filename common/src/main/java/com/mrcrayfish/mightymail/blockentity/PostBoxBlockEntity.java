@@ -14,9 +14,11 @@ import net.minecraft.world.level.block.state.BlockState;
  */
 public class PostBoxBlockEntity extends BasicLootBlockEntity
 {
+    public static final int CONTAINER_SIZE = 6;
+
     public PostBoxBlockEntity(BlockPos pos, BlockState state)
     {
-        super(ModBlockEntities.POST_BOX.get(), pos, state, 6);
+        super(ModBlockEntities.POST_BOX.get(), pos, state, CONTAINER_SIZE);
     }
 
     @Override
