@@ -6,6 +6,7 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ShulkerBoxSlot;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 
@@ -32,7 +33,7 @@ public class PostBoxMenu extends AbstractContainerMenu
         {
             for(int i = 0; i < 2; i++)
             {
-                this.addSlot(new Slot(container, j * 2 + i, 235 + i * 18, 14 + j * 18));
+                this.addSlot(new PostBoxSlot(container, j * 2 + i, 235 + i * 18, 14 + j * 18));
             }
         }
 
