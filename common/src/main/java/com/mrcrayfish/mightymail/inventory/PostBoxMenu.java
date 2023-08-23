@@ -90,7 +90,21 @@ public class PostBoxMenu extends AbstractContainerMenu
                     return ItemStack.EMPTY;
                 }
             }
-            else if(!this.moveItemStackTo(slotStack, 0, this.container.getContainerSize(), false))
+            else if(slotStack.getItem().canFitInsideContainerItems())
+            {
+                if(!this.moveItemStackTo(slotStack, 0, this.container.getContainerSize(), false))
+                {
+                    return ItemStack.EMPTY;
+                }
+            }
+            else if(slotIndex < this.slots.size() - 9)
+            {
+                if(!this.moveItemStackTo(slotStack, this.slots.size() - 9, this.slots.size(), true))
+                {
+                    return ItemStack.EMPTY;
+                }
+            }
+            else if(!this.moveItemStackTo(slotStack, this.container.getContainerSize(), this.slots.size() - 9, false))
             {
                 return ItemStack.EMPTY;
             }
