@@ -2,11 +2,13 @@ package com.mrcrayfish.mightymail.blockentity;
 
 import com.mrcrayfish.mightymail.core.ModBlockEntities;
 import com.mrcrayfish.mightymail.inventory.PostBoxMenu;
+import com.mrcrayfish.mightymail.util.MailHelper;
 import com.mrcrayfish.mightymail.util.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 
 /**
@@ -37,5 +39,11 @@ public class PostBoxBlockEntity extends BasicLootBlockEntity
     protected AbstractContainerMenu createMenu(int windowId, Inventory playerInventory)
     {
         return new PostBoxMenu(windowId, playerInventory, this);
+    }
+
+    @Override
+    public boolean canPlaceItem(int slotIndex, ItemStack stack)
+    {
+        return !MailHelper.isBannedItem(stack);
     }
 }

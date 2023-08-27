@@ -1,5 +1,6 @@
 package com.mrcrayfish.mightymail.inventory;
 
+import com.mrcrayfish.mightymail.util.MailHelper;
 import net.minecraft.world.Container;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
@@ -17,6 +18,6 @@ public class PostBoxSlot extends Slot
     @Override
     public boolean mayPlace(ItemStack stack)
     {
-        return stack.getItem().canFitInsideContainerItems();
+        return !MailHelper.isBannedItem(stack);
     }
 }
