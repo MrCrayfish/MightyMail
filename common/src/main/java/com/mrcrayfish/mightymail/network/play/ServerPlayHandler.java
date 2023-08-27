@@ -8,6 +8,7 @@ import com.mrcrayfish.mightymail.network.Network;
 import com.mrcrayfish.mightymail.network.message.MessageClearMessage;
 import com.mrcrayfish.mightymail.network.message.MessageSendPackage;
 import com.mrcrayfish.mightymail.network.message.MessageSetMailboxName;
+import com.mrcrayfish.mightymail.util.MailHelper;
 import com.mrcrayfish.mightymail.util.Utils;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
@@ -41,6 +42,16 @@ public class ServerPlayHandler
             Container container = postBox.getContainer();
             if(container.isEmpty())
                 return;
+
+            // Check if all items in the container can be sent
+            for(int i = 0; i < container.getContainerSize(); i++)
+            {
+                ItemStack stack = container.getItem(i);
+                if(!stack.isEmpty() && MailHelper.isBannedItem(stack))
+                {
+                    return;
+                }
+            }
 
             DeliveryService.get(player.server).ifPresent(service -> {
                 ItemStack stack = PackageItem.create(container, message.getMessage(), player.getGameProfile().getName());
