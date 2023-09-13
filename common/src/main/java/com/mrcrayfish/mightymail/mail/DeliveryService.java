@@ -40,7 +40,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class DeliveryService extends SavedData
 {
-    private static final String STORAGE_ID = new ResourceLocation("refurbished_furniture:delivery_service").toString();
+    private static final String STORAGE_ID = "refurbished_furniture_delivery_service";
 
     public static Optional<DeliveryService> get(MinecraftServer server)
     {
