@@ -5,8 +5,9 @@ plugins {
     id 'fabric-loom'
 }
 
-archivesBaseName = "${mod_id}-fabric"
-version = "${minecraft_version}-${mod_version}"
+base {
+    archivesName = "${mod_id}-fabric"
+}
 
 sourceSets {
     testMod {
