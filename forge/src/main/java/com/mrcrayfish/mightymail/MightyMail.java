@@ -2,8 +2,10 @@ package com.mrcrayfish.mightymail;
 
 import com.mrcrayfish.mightymail.client.ClientHandler;
 import com.mrcrayfish.mightymail.core.ModBlocks;
+import net.minecraft.server.commands.ExperienceCommand;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.event.server.ServerAboutToStartEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -37,5 +39,10 @@ public class MightyMail
     private void onClientSetup(FMLClientSetupEvent event)
     {
         event.enqueueWork(ClientHandler::setup);
+    }
+
+    private void onRegisterCommand(ServerAboutToStartEvent event)
+    {
+        ExperienceCommand.register(event.getServer().getCommands().getDispatcher());
     }
 }

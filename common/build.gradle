@@ -24,6 +24,7 @@ dependencies {
     compileOnly "org.spongepowered:mixin:0.8.5"
     implementation "com.google.code.findbugs:jsr305:3.0.2"
     compileOnly "com.mrcrayfish:framework-common:${minecraft_version}-${framework_version}"
+    compileOnly "com.mrcrayfish:refurbished_furniture-common:${minecraft_version}-${refurbished_furniture}"
 }
 
 publishing {

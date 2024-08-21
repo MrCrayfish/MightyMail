@@ -1,7 +1,9 @@
 package com.mrcrayfish.mightymail;
 
 import com.mrcrayfish.framework.api.event.PlayerEvents;
+import com.mrcrayfish.framework.api.event.ServerEvents;
 import com.mrcrayfish.framework.api.event.TickEvents;
+import com.mrcrayfish.mightymail.command.MigrateCommand;
 import com.mrcrayfish.mightymail.core.ModItems;
 import com.mrcrayfish.mightymail.item.PackageItem;
 import com.mrcrayfish.mightymail.mail.DeliveryService;
@@ -26,6 +28,9 @@ public class Bootstrap
             if(player instanceof ServerPlayer serverPlayer) {
                 DeliveryService.get(serverPlayer.server).ifPresent(service -> service.playerLoggedOut(serverPlayer));
             }
+        });
+        ServerEvents.STARTING.register(server -> {
+            MigrateCommand.register(server.getCommands().getDispatcher());
         });
         DispenserBlock.registerBehavior(ModItems.PACKAGE::get, (source, stack) -> {
             Direction direction = source.getBlockState().getValue(DispenserBlock.FACING);
