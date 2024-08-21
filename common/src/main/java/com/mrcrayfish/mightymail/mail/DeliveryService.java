@@ -25,15 +25,7 @@ import org.apache.commons.lang3.mutable.MutableObject;
 import org.apache.commons.lang3.tuple.Pair;
 
 import javax.annotation.Nullable;
-import java.util.ArrayDeque;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Queue;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -77,6 +69,14 @@ public class DeliveryService extends SavedData
     public MinecraftServer getServer()
     {
         return this.server;
+    }
+
+    /**
+     * @return An unmodifiable view of the registered mailboxes
+     */
+    public Map<UUID, Mailbox> getMailboxes()
+    {
+        return Collections.unmodifiableMap(this.mailboxes);
     }
 
     /**
