@@ -40,9 +40,4 @@ public class MightyMail
     {
         event.enqueueWork(ClientHandler::setup);
     }
-
-    private void onRegisterCommand(ServerAboutToStartEvent event)
-    {
-        ExperienceCommand.register(event.getServer().getCommands().getDispatcher());
-    }
 }
