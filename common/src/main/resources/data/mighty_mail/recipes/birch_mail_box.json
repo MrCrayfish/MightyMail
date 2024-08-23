@@ -13,15 +13,12 @@
     },
     "S": {
       "item": "minecraft:birch_slab"
-    },
-    "B": {
-      "item": "minecraft:stick"
     }
   },
   "pattern": [
     "SSS",
     "PCP",
-    "BFB"
+    " F "
   ],
   "result": {
     "item": "mighty_mail:birch_mail_box"

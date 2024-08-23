@@ -13,15 +13,12 @@
     },
     "S": {
       "item": "minecraft:crimson_slab"
-    },
-    "B": {
-      "item": "minecraft:stick"
     }
   },
   "pattern": [
     "SSS",
     "PCP",
-    "BFB"
+    " F "
   ],
   "result": {
     "item": "mighty_mail:crimson_mail_box"

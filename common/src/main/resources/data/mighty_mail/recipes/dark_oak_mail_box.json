@@ -13,15 +13,12 @@
     },
     "S": {
       "item": "minecraft:dark_oak_slab"
-    },
-    "B": {
-      "item": "minecraft:stick"
     }
   },
   "pattern": [
     "SSS",
     "PCP",
-    "BFB"
+    " F "
   ],
   "result": {
     "item": "mighty_mail:dark_oak_mail_box"
