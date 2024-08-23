@@ -13,15 +13,12 @@
     },
     "S": {
       "item": "minecraft:warped_slab"
-    },
-    "B": {
-      "item": "minecraft:stick"
     }
   },
   "pattern": [
     "SSS",
     "PCP",
-    "BFB"
+    " F "
   ],
   "result": {
     "item": "mighty_mail:warped_mail_box"
