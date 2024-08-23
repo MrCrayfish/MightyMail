@@ -13,12 +13,15 @@
     },
     "S": {
       "item": "minecraft:mangrove_slab"
+    },
+    "B": {
+      "item": "minecraft:stick"
     }
   },
   "pattern": [
     "SSS",
     "PCP",
-    " F "
+    "BFB"
   ],
   "result": {
     "item": "mighty_mail:mangrove_mail_box"

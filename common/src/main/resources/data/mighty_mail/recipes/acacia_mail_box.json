@@ -13,12 +13,15 @@
     },
     "S": {
       "item": "minecraft:acacia_slab"
+    },
+    "B": {
+      "item": "minecraft:stick"
     }
   },
   "pattern": [
     "SSS",
     "PCP",
-    " F "
+    "BFB"
   ],
   "result": {
     "item": "mighty_mail:acacia_mail_box"

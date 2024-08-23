@@ -13,12 +13,15 @@
     },
     "S": {
       "item": "minecraft:spruce_slab"
+    },
+    "B": {
+      "item": "minecraft:stick"
     }
   },
   "pattern": [
     "SSS",
     "PCP",
-    " F "
+    "BFB"
   ],
   "result": {
     "item": "mighty_mail:spruce_mail_box"
