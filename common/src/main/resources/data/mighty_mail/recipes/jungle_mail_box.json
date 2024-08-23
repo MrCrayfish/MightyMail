@@ -13,12 +13,15 @@
     },
     "S": {
       "item": "minecraft:jungle_slab"
+    },
+    "B": {
+      "item": "minecraft:stick"
     }
   },
   "pattern": [
     "SSS",
     "PCP",
-    " F "
+    "BFB"
   ],
   "result": {
     "item": "mighty_mail:jungle_mail_box"
