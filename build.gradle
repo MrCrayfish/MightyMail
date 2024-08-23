@@ -85,6 +85,7 @@ subprojects {
             "fabric_version": fabric_version,
             "fabric_loader_version": fabric_loader_version,
             "framework_version": framework_version,
+            "refurbished_furniture_version": refurbished_furniture,
             "mod_name": mod_name,
             "mod_version": mod_version,
             "mod_author": mod_author,
