@@ -3,9 +3,11 @@ package com.mrcrayfish.mightymail.network.play;
 import com.mrcrayfish.framework.api.network.MessageContext;
 import com.mrcrayfish.mightymail.inventory.PostBoxMenu;
 import com.mrcrayfish.mightymail.item.PackageItem;
+import com.mrcrayfish.mightymail.mail.DeliveryResult;
 import com.mrcrayfish.mightymail.mail.DeliveryService;
 import com.mrcrayfish.mightymail.network.Network;
 import com.mrcrayfish.mightymail.network.message.MessageClearMessage;
+import com.mrcrayfish.mightymail.network.message.MessageShowDeliveryResult;
 import com.mrcrayfish.mightymail.network.message.MessageSendPackage;
 import com.mrcrayfish.mightymail.network.message.MessageSetMailboxName;
 import com.mrcrayfish.mightymail.util.MailHelper;
@@ -55,9 +57,15 @@ public class ServerPlayHandler
 
             DeliveryService.get(player.server).ifPresent(service -> {
                 ItemStack stack = PackageItem.create(container, message.getMessage(), player.getGameProfile().getName());
-                if(service.sendMail(message.getMailboxId(), stack)) {
+                DeliveryResult result = service.sendMail(message.getMailboxId(), stack);
+                if(result.success()) {
                     container.clearContent();
                     Network.getPlay().sendToPlayer(() -> player, new MessageClearMessage());
+                    Network.getPlay().sendToPlayer(() -> player, new MessageShowDeliveryResult(result));
+                } else {
+                    result.message().ifPresent(s -> {
+                        Network.getPlay().sendToPlayer(() -> player, new MessageShowDeliveryResult(result));
+                    });
                 }
             });
         }

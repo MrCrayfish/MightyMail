@@ -5,6 +5,7 @@ import com.mrcrayfish.framework.api.network.FrameworkNetwork;
 import com.mrcrayfish.framework.api.network.MessageDirection;
 import com.mrcrayfish.mightymail.Constants;
 import com.mrcrayfish.mightymail.network.message.MessageClearMessage;
+import com.mrcrayfish.mightymail.network.message.MessageShowDeliveryResult;
 import com.mrcrayfish.mightymail.network.message.MessageSendPackage;
 import com.mrcrayfish.mightymail.network.message.MessageSetMailboxName;
 import com.mrcrayfish.mightymail.network.message.MessageUpdateMailboxes;
@@ -21,6 +22,7 @@ public class Network
             .registerPlayMessage(MessageUpdateMailboxes.class, MessageDirection.PLAY_CLIENT_BOUND)
             .registerPlayMessage(MessageSendPackage.class, MessageDirection.PLAY_SERVER_BOUND)
             .registerPlayMessage(MessageClearMessage.class, MessageDirection.PLAY_CLIENT_BOUND)
+            .registerPlayMessage(MessageShowDeliveryResult.class, MessageDirection.PLAY_CLIENT_BOUND)
             .build();
 
     public static void init() {}

@@ -24,6 +24,11 @@ public class Utils
         return new ResourceLocation(Constants.MOD_ID, name);
     }
 
+    public static String translationKey(String category, String path)
+    {
+        return String.format("%s.%s.%s", category, Constants.MOD_ID, path);
+    }
+
     /**
      * Creates a translatable Component specific to this mod. The translation key
      * uses a common format of a category, followed by the mod id, and then a path.
@@ -34,7 +39,7 @@ public class Utils
      */
     public static MutableComponent translation(String category, String path, Object ... params)
     {
-        return Component.translatable(String.format("%s.%s.%s", category, Constants.MOD_ID, path), params);
+        return Component.translatable("%s.%s.%s".formatted(category, Constants.MOD_ID, path), params);
     }
 
     /**
