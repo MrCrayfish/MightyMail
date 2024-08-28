@@ -24,11 +24,6 @@ public class Bootstrap
     {
         Network.init();
         TickEvents.START_SERVER.register(server -> DeliveryService.get(server).ifPresent(DeliveryService::serverTick));
-        PlayerEvents.LOGGED_OUT.register(player -> {
-            if(player instanceof ServerPlayer serverPlayer) {
-                DeliveryService.get(serverPlayer.server).ifPresent(service -> service.playerLoggedOut(serverPlayer));
-            }
-        });
         ServerEvents.STARTING.register(server -> {
             MigrateCommand.register(server.getCommands().getDispatcher());
         });
