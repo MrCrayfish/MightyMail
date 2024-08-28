@@ -3,7 +3,6 @@ package com.mrcrayfish.mightymail.network.play;
 import com.mrcrayfish.mightymail.client.gui.screen.PostBoxScreen;
 import com.mrcrayfish.mightymail.network.message.MessageClearMessage;
 import com.mrcrayfish.mightymail.network.message.MessageShowDeliveryResult;
-import com.mrcrayfish.mightymail.network.message.MessageUpdateMailboxes;
 import net.minecraft.client.Minecraft;
 
 /**
@@ -13,11 +12,6 @@ import net.minecraft.client.Minecraft;
  */
 public class ClientPlayHandler
 {
-    public static void handleMessageUpdateMailboxes(MessageUpdateMailboxes message)
-    {
-        PostBoxScreen.updateMailboxes(message.getMailboxes());
-    }
-
     public static void handleMessageClearMessage(MessageClearMessage message)
     {
         Minecraft mc = Minecraft.getInstance();
