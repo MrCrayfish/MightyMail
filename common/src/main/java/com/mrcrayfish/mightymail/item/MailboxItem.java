@@ -35,7 +35,10 @@ public class MailboxItem extends BlockItem
                     player.sendSystemMessage(Utils.translation("gui", "mail_box_limit", maxCount), true);
                     return false;
                 }
+                return super.canPlace(context, state);
             }
+            // If service wasn't available, do not allow. This should never happen anyway
+            return false;
         }
         return super.canPlace(context, state);
     }
