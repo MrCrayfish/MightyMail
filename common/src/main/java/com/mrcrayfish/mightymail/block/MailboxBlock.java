@@ -6,10 +6,11 @@ import com.mrcrayfish.mightymail.blockentity.MailboxBlockEntity;
 import com.mrcrayfish.mightymail.client.ScreenHooks;
 import com.mrcrayfish.mightymail.mail.DeliveryService;
 import com.mrcrayfish.mightymail.mail.Mailbox;
+import com.mrcrayfish.mightymail.util.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.Container;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -129,6 +130,12 @@ public class MailboxBlock extends RotatedBlock implements EntityBlock
     {
         if(!level.isClientSide() && level.getBlockEntity(pos) instanceof MailboxBlockEntity blockEntity)
         {
+            if(!DeliveryService.isDeliverableDimension(level))
+            {
+                ((ServerPlayer) player).sendSystemMessage(Utils.translation("gui", "invalid_mailbox"), true);
+                return InteractionResult.SUCCESS;
+            }
+
             // Remove the little flag once the player open the mailbox
             if(state.getValue(ENABLED))
             {

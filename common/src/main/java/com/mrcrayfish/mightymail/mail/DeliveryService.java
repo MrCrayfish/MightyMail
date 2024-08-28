@@ -11,6 +11,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
@@ -117,18 +118,30 @@ public class DeliveryService extends SavedData
      *
      * @param id the identifier of the mailbox
      * @param stack the ItemStack to send
-     * @return True if added to the queue, otherwise false if mailbox doesn't exist or queue is full
+     * @return An optional string. If an error occurs, the optional will contain a translation key
      */
-    public boolean sendMail(UUID id, ItemStack stack)
+    public DeliveryResult sendMail(UUID id, ItemStack stack)
     {
         Mailbox mailbox = this.mailboxes.get(id);
-        if(mailbox != null && mailbox.queue().size() < Config.SERVER.mailQueueSize.get())
-        {
-            mailbox.queue().offer(stack);
-            this.setDirty();
-            return true;
-        }
-        return false;
+
+        // Check if the mailbox exists
+        if(mailbox == null)
+            return DeliveryResult.createFail(Utils.translationKey("gui", "delivery_service.unknown_mailbox"));
+
+        // Check if the queue is not full
+        if(mailbox.queue().size() >= Config.SERVER.mailQueueSize.get())
+            return DeliveryResult.createFail(Utils.translationKey("gui", "delivery_service.mailbox_queue_full"));
+
+        // Check if mailbox is in a deliverable dimension
+        if(!isDeliverableDimension(mailbox.levelKey()))
+            return DeliveryResult.createFail(Utils.translationKey("gui", "delivery_service.undeliverable_dimension"));
+
+        // Push to queue and mark as dirty to ensure it's saved
+        mailbox.queue().offer(stack);
+        this.setDirty();
+
+        // Empty optional means successful
+        return DeliveryResult.createSuccess(Utils.translationKey("gui", "delivery_service.package_sent"));
     }
 
     /**
@@ -312,5 +325,47 @@ public class DeliveryService extends SavedData
             case "minecraft:the_end" -> Level.END;
             default -> ResourceKey.create(Registries.DIMENSION, new ResourceLocation(levelKey));
         };
+    }
+
+    /**
+     * Determines if the given player can create/place a mailbox. Mailboxes are limited per player,
+     * as specified by a maximum count in the config.
+     *
+     * @param player the player to test
+     * @return True if the player can place a mailbox
+     */
+    public boolean canCreateMailbox(Player player)
+    {
+        long count = this.mailboxes.values().stream()
+            .filter(box -> player.getUUID().equals(box.owner().getValue()))
+            .count();
+        return Config.SERVER.maxMailboxesPerPlayer.get() > count;
+    }
+
+    /**
+     * Determines if the given level allows mailboxes to be placed
+     *
+     * @param level the level to test
+     * @return True if mailboxes are allowed to be placed
+     */
+    public static boolean isDeliverableDimension(Level level)
+    {
+        return isDeliverableDimension(level.dimension());
+    }
+
+    /**
+     * Determines if the given level allows mailboxes to be placed
+     *
+     * @param key the level key to test
+     * @return True if mailboxes are allowed to be placed
+     */
+    public static boolean isDeliverableDimension(ResourceKey<Level> key)
+    {
+        List<String> validDimensions = Config.SERVER.allowedDimensions.get();
+        if(!validDimensions.isEmpty())
+        {
+            return validDimensions.contains(key.location().toString());
+        }
+        return true;
     }
 }

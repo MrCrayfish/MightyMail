@@ -6,6 +6,9 @@ import com.mrcrayfish.framework.api.config.ConfigType;
 import com.mrcrayfish.framework.api.config.FrameworkConfig;
 import com.mrcrayfish.framework.api.config.IntProperty;
 import com.mrcrayfish.framework.api.config.ListProperty;
+import com.mrcrayfish.framework.api.config.validate.Validator;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 
 /**
  * Author: MrCrayfish
@@ -17,6 +20,10 @@ public class Config
 
     public static class Server
     {
+        @ConfigProperty(name = "maxMailboxesPerPlayer", comment = """
+                The maximum amount of mailboxes a player is allowed to register/own.""")
+        public final IntProperty maxMailboxesPerPlayer = IntProperty.create(16, 1, Integer.MAX_VALUE);
+
         @ConfigProperty(name = "mailboxInventoryRows", comment = """
                 The maximum amount of items that can be queued for delivery for a mail box""")
         public final IntProperty mailboxInventoryRows = IntProperty.create(1, 1, 6);
@@ -42,5 +49,26 @@ public class Config
             ]
             ^ Note: This is just an example. Write your list below.""")
         public final ListProperty<String> bannedItems = ListProperty.create(ListProperty.STRING);
+
+        @ConfigProperty(name = "allowedDimensions", comment = """
+            A list of dimensions you are allowed to place mailboxes. An empty list means that
+            mailboxes can be placed in any dimension.
+            An example of how the list is defined:
+            allowedDimensions = [
+                "minecraft:overworld",
+                "minecraft:the_nether",
+                ...
+            ]
+            ^ Note: This is just an example. Write your list below.""")
+        public final ListProperty<String> allowedDimensions = ListProperty.create(ListProperty.STRING, new Validator<>() {
+            @Override
+            public boolean test(String value) {
+                return ResourceLocation.isValidResourceLocation(value);
+            }
+            @Override
+            public Component getHint() {
+                return Component.literal("Must a valid ResourceLocation, e.g. \"namespace:path\"");
+            }
+        });
     }
 }
