@@ -29,6 +29,8 @@
     "gui.mighty_mail.invalid_dimension": "Mailboxes cannot be placed in this dimension",
     "gui.mighty_mail.invalid_mailbox": "Mailbox is disabled as it is not allowed",
     "gui.mighty_mail.mail_box_limit": "You've reached the limit of %s Mailboxes",
+    "gui.mighty_mail.default_mailbox_name": "Mailbox",
+    "gui.mighty_mail.unknown_mailbox_owner": "Unknown Player",
     "gui.mighty_mail.delivery_service.unknown_mailbox": "Unknown or invalid mailbox",
     "gui.mighty_mail.delivery_service.mailbox_queue_full": "The selected mailbox has reached its max mail queue",
     "gui.mighty_mail.delivery_service.undeliverable_dimension": "The selected mailbox is in an undeliverable dimension",
