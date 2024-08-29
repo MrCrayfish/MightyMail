@@ -28,10 +28,10 @@ public class Bootstrap
             MigrateCommand.register(server.getCommands().getDispatcher());
         });
         DispenserBlock.registerBehavior(ModItems.PACKAGE::get, (source, stack) -> {
-            Direction direction = source.getBlockState().getValue(DispenserBlock.FACING);
-            Vec3 pos = source.getPos().relative(direction).getCenter();
+            Direction direction = source.state().getValue(DispenserBlock.FACING);
+            Vec3 pos = source.pos().relative(direction).getCenter();
             PackageItem.getPackagedItems(stack).forEach(s -> {
-                Containers.dropItemStack(source.getLevel(), pos.x, pos.y, pos.z, s);
+                Containers.dropItemStack(source.level(), pos.x, pos.y, pos.z, s);
             });
             return ItemStack.EMPTY;
         });

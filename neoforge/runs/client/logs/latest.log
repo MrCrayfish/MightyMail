@@ -1,0 +1,177 @@
+[29Aug2024 14:25:16.565] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgeclientuserdev, --version, 20.4.237, --assetIndex, asset-index, --assetsDir, C:\Users\Casey\.gradle\caches\minecraft\assets\1.20.4, --gameDir, ., --fml.neoForgeVersion, 20.4.237, --fml.fmlVersion, 2.0.17, --fml.mcVersion, 1.20.4, --fml.neoFormVersion, 20231207.154220]
+[29Aug2024 14:25:16.568] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 10.0.9+10.0.9+main.dcd20f30 starting: java version 17.0.1 by Oracle Corporation; OS Windows 10 arch amd64 version 10.0
+[29Aug2024 14:25:16.715] [main/INFO] [net.neoforged.fml.loading.ImmediateWindowHandler/]: Loading ImmediateWindowProvider fmlearlywindow
+[29Aug2024 14:25:16.851] [main/INFO] [EARLYDISPLAY/]: Trying GL version 4.6
+[29Aug2024 14:25:17.001] [main/INFO] [EARLYDISPLAY/]: Requested GL version 4.6 got version 4.6
+[29Aug2024 14:25:17.165] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/C:/Users/Casey/.gradle/caches/modules-2/files-2.1/net.fabricmc/sponge-mixin/0.13.1+mixin.0.8.5/618f4dff860cf2d6b5196073b1a5f5e0a8591acb/sponge-mixin-0.13.1+mixin.0.8.5.jar%23139!/ Service=ModLauncher Env=CLIENT
+[29Aug2024 14:25:17.240] [pool-2-thread-1/INFO] [EARLYDISPLAY/]: GL info: NVIDIA GeForce GTX 1080 Ti/PCIe/SSE2 GL version 4.6.0 NVIDIA 537.42, NVIDIA Corporation
+[29Aug2024 14:25:17.520] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "neoforge-20.4.237.jar" of type MOD with provider net.neoforged.fml.loading.moddiscovery.MinecraftLocator@7da10b5b
+[29Aug2024 14:25:17.520] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "main" of type MOD with provider net.neoforged.fml.loading.moddiscovery.MinecraftLocator@7da10b5b
+[29Aug2024 14:25:17.520] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "" of type MOD with provider net.neoforged.fml.loading.moddiscovery.MinecraftLocator@7da10b5b
+[29Aug2024 14:25:17.693] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "framework-neoforge-1.20.4-0.7.6.jar" of type MOD with provider net.neoforged.fml.loading.moddiscovery.ClasspathLocator@deb3b60
+[29Aug2024 14:25:17.693] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "refurbished_furniture-neoforge-1.20.4-1.0.6.jar" of type MOD with provider net.neoforged.fml.loading.moddiscovery.ClasspathLocator@deb3b60
+[29Aug2024 14:25:17.694] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "catalogue-neoforge-1.20.4-1.9.1.jar" of type MOD with provider net.neoforged.fml.loading.moddiscovery.ClasspathLocator@deb3b60
+[29Aug2024 14:25:17.694] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "CraftTweaker-neoforge-1.20.4-17.0.12.jar" of type MOD with provider net.neoforged.fml.loading.moddiscovery.ClasspathLocator@deb3b60
+[29Aug2024 14:25:17.694] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "framework-neoforge-1.20.4-0.7.6.jar" of type MOD with provider net.neoforged.fml.loading.moddiscovery.ClasspathLocator@deb3b60
+[29Aug2024 14:25:17.694] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "refurbished_furniture-neoforge-1.20.4-1.0.6.jar" of type MOD with provider net.neoforged.fml.loading.moddiscovery.ClasspathLocator@deb3b60
+[29Aug2024 14:25:17.694] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "catalogue-neoforge-1.20.4-1.9.1.jar" of type MOD with provider net.neoforged.fml.loading.moddiscovery.ClasspathLocator@deb3b60
+[29Aug2024 14:25:17.695] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "CraftTweaker-neoforge-1.20.4-17.0.12.jar" of type MOD with provider net.neoforged.fml.loading.moddiscovery.ClasspathLocator@deb3b60
+[29Aug2024 14:25:17.900] [main/INFO] [net.neoforged.fml.loading.moddiscovery.JarInJarDependencyLocator/]: Found 1 dependencies adding them to mods collection
+[29Aug2024 14:25:17.900] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "mixinextras-neoforge-0.3.5.jar" of type GAMELIBRARY with provider net.neoforged.fml.loading.moddiscovery.JarInJarDependencyLocator@4a183d02
+[29Aug2024 14:25:19.351] [main/INFO] [mixin/]: Compatibility level set to JAVA_17
+[29Aug2024 14:25:19.367] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgeclientuserdev' with arguments [--version, 20.4.237, --gameDir, ., --assetsDir, C:\Users\Casey\.gradle\caches\minecraft\assets\1.20.4, --assetIndex, asset-index]
+[29Aug2024 14:25:19.475] [main/WARN] [mixin/]: Reference map 'crafttweaker.refmap.json' for crafttweaker.mixins.json could not be read. If this is a development environment you can ignore this message
+[29Aug2024 14:25:19.487] [main/WARN] [mixin/]: Reference map 'crafttweaker.refmap.json' for crafttweaker.neoforge.mixins.json could not be read. If this is a development environment you can ignore this message
+[29Aug2024 14:25:19.499] [main/WARN] [mixin/]: Reference map 'refurbished_furniture.refmap.json' for refurbished_furniture.common.mixins.json could not be read. If this is a development environment you can ignore this message
+[29Aug2024 14:25:21.936] [pool-10-thread-1/INFO] [MixinExtras|Service/]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.3.5).
+[29Aug2024 14:25:30.969] [pool-10-thread-1/WARN] [mixin/]: @Inject(@At("INVOKE_ASSIGN")) Shift.BY=2 on refurbished_furniture.common.mixins.json:LevelChunkMixin from mod refurbished_furniture::handler$zzj000$refurbished_furniture$refurbishedFurniture$AfterRemoveBlockEntity exceeds the maximum allowed value: 0. Increase the value of maxShiftBy to suppress this warning.
+[29Aug2024 14:25:31.796] [Datafixer Bootstrap/INFO] [com.mojang.datafixers.DataFixerBuilder/]: 198 Datafixer optimizations took 1638 milliseconds
+[29Aug2024 14:25:36.191] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, location] and [teleport, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[29Aug2024 14:25:36.194] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, location] and [teleport, targets] with inputs: [0.1 -0.5 .9, 0 0 0]
+[29Aug2024 14:25:36.199] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, destination] and [teleport, targets] with inputs: [Player, 0123, @e, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[29Aug2024 14:25:36.201] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, targets] and [teleport, destination] with inputs: [Player, 0123, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[29Aug2024 14:25:36.205] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, targets, location] and [teleport, targets, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[29Aug2024 14:25:36.776] [Render thread/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/Casey/Documents/GitHub/MightyMail/neoforge/.gradle/repositories/ng_dummy_ng/net/neoforged/neoforge/20.4.237/neoforge-20.4.237.jar%23192!/assets/.mcassetsroot' uses unexpected schema
+[29Aug2024 14:25:36.777] [Render thread/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/Casey/Documents/GitHub/MightyMail/neoforge/.gradle/repositories/ng_dummy_ng/net/neoforged/neoforge/20.4.237/neoforge-20.4.237.jar%23192!/data/.mcassetsroot' uses unexpected schema
+[29Aug2024 14:25:37.283] [Render thread/INFO] [com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService/]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, name=PROD]
+[29Aug2024 14:25:37.671] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Setting user: Dev
+[29Aug2024 14:25:38.024] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Backend library: LWJGL version 3.3.2+13
+[29Aug2024 14:25:38.945] [modloading-worker-0/INFO] [net.neoforged.neoforge.common.NeoForgeMod/NEOFORGE-MOD]: NeoForge mod loading, version 20.4.237, for MC 1.20.4 with MCP 20231207.154220
+[29Aug2024 14:25:45.283] [Render thread/INFO] [net.neoforged.neoforge.gametest.GameTestHooks/]: Enabled Gametest Namespaces: [mighty_mail]
+[29Aug2024 14:25:46.252] [Render thread/INFO] [net.minecraft.server.packs.resources.ReloadableResourceManager/]: Reloading ResourceManager: mod_resources, mod:crafttweaker, mod:framework, mod:mighty_mail, mod:neoforge, mod:catalogue, mod:refurbished_furniture, vanilla
+[29Aug2024 14:25:46.999] [Worker-Main-4/INFO] [net.minecraft.client.gui.font.providers.UnihexProvider/]: Found unifont_all_no_pua-15.1.04.hex, loading
+[29Aug2024 14:25:49.784] [Forge Version Check/INFO] [net.neoforged.fml.VersionChecker/]: [crafttweaker] Starting version check at https://updates.blamejared.com/get?n=crafttweaker&gv=1.20.4&ml=neoforge
+[29Aug2024 14:25:53.795] [Forge Version Check/INFO] [net.neoforged.fml.VersionChecker/]: [crafttweaker] Found status: BETA_OUTDATED Current: 17.0.12 Target: 17.0.19
+[29Aug2024 14:25:53.796] [Forge Version Check/INFO] [net.neoforged.fml.VersionChecker/]: [framework] Starting version check at https://mrcrayfish.com/modupdatejson?id=framework
+[29Aug2024 14:25:54.189] [Render thread/INFO] [Framework/SYNCED_ENTITY_DATA]: Registered synced data key refurbished_furniture:lock_yaw for refurbished_furniture:seat
+[29Aug2024 14:25:54.512] [Forge Version Check/WARN] [net.neoforged.fml.VersionChecker/]: Failed to process update information
+com.google.gson.JsonSyntaxException: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 1 path $
+	at com.google.gson.Gson.fromJson(Gson.java:1226) ~[gson-2.10.1.jar%23111!/:?]
+	at com.google.gson.Gson.fromJson(Gson.java:1124) ~[gson-2.10.1.jar%23111!/:?]
+	at com.google.gson.Gson.fromJson(Gson.java:1034) ~[gson-2.10.1.jar%23111!/:?]
+	at com.google.gson.Gson.fromJson(Gson.java:969) ~[gson-2.10.1.jar%23111!/:?]
+	at net.neoforged.fml.VersionChecker$1.process(VersionChecker.java:183) ~[loader-2.0.17.jar%23148!/:2.0]
+	at java.lang.Iterable.forEach(Iterable.java:75) ~[?:?]
+	at net.neoforged.fml.VersionChecker$1.run(VersionChecker.java:114) ~[loader-2.0.17.jar%23148!/:2.0]
+Caused by: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 1 path $
+	at com.google.gson.stream.JsonReader.beginObject(JsonReader.java:393) ~[gson-2.10.1.jar%23111!/:?]
+	at com.google.gson.internal.bind.MapTypeAdapterFactory$Adapter.read(MapTypeAdapterFactory.java:182) ~[gson-2.10.1.jar%23111!/:?]
+	at com.google.gson.internal.bind.MapTypeAdapterFactory$Adapter.read(MapTypeAdapterFactory.java:144) ~[gson-2.10.1.jar%23111!/:?]
+	at com.google.gson.Gson.fromJson(Gson.java:1214) ~[gson-2.10.1.jar%23111!/:?]
+	... 6 more
+[29Aug2024 14:25:54.513] [Forge Version Check/INFO] [net.neoforged.fml.VersionChecker/]: [mighty_mail] Starting version check at https://mrcrayfish.com/modupdatejson?id=mighty_mail
+[29Aug2024 14:25:54.623] [Render thread/ERROR] [net.minecraft.client.sounds.SoundManager/]: Missing subtitle translation{key='subtitle.refurbished_furniture.cabinet.open', args=[]} for sound event: refurbished_furniture:block.cabinet.open
+[29Aug2024 14:25:54.623] [Render thread/ERROR] [net.minecraft.client.sounds.SoundManager/]: Missing subtitle translation{key='subtitle.refurbished_furniture.microwave.fan', args=[]} for sound event: refurbished_furniture:block.microwave.fan
+[29Aug2024 14:25:54.623] [Render thread/ERROR] [net.minecraft.client.sounds.SoundManager/]: Missing subtitle translation{key='subtitle.refurbished_furniture.wrench_hover_link', args=[]} for sound event: refurbished_furniture:item.wrench.hover_link
+[29Aug2024 14:25:54.625] [Render thread/ERROR] [net.minecraft.client.sounds.SoundManager/]: Missing subtitle translation{key='subtitle.refurbished_furniture.cabinet.close', args=[]} for sound event: refurbished_furniture:block.cabinet.close
+[29Aug2024 14:25:54.625] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:item.goat_horn.play
+[29Aug2024 14:25:54.626] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:entity.goat.screaming.horn_break
+[29Aug2024 14:25:54.626] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:entity.generic.wind_burst
+[29Aug2024 14:25:54.678] [Forge Version Check/WARN] [net.neoforged.fml.VersionChecker/]: Failed to process update information
+com.google.gson.JsonSyntaxException: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 1 path $
+	at com.google.gson.Gson.fromJson(Gson.java:1226) ~[gson-2.10.1.jar%23111!/:?]
+	at com.google.gson.Gson.fromJson(Gson.java:1124) ~[gson-2.10.1.jar%23111!/:?]
+	at com.google.gson.Gson.fromJson(Gson.java:1034) ~[gson-2.10.1.jar%23111!/:?]
+	at com.google.gson.Gson.fromJson(Gson.java:969) ~[gson-2.10.1.jar%23111!/:?]
+	at net.neoforged.fml.VersionChecker$1.process(VersionChecker.java:183) ~[loader-2.0.17.jar%23148!/:2.0]
+	at java.lang.Iterable.forEach(Iterable.java:75) ~[?:?]
+	at net.neoforged.fml.VersionChecker$1.run(VersionChecker.java:114) ~[loader-2.0.17.jar%23148!/:2.0]
+Caused by: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 1 path $
+	at com.google.gson.stream.JsonReader.beginObject(JsonReader.java:393) ~[gson-2.10.1.jar%23111!/:?]
+	at com.google.gson.internal.bind.MapTypeAdapterFactory$Adapter.read(MapTypeAdapterFactory.java:182) ~[gson-2.10.1.jar%23111!/:?]
+	at com.google.gson.internal.bind.MapTypeAdapterFactory$Adapter.read(MapTypeAdapterFactory.java:144) ~[gson-2.10.1.jar%23111!/:?]
+	at com.google.gson.Gson.fromJson(Gson.java:1214) ~[gson-2.10.1.jar%23111!/:?]
+	... 6 more
+[29Aug2024 14:25:54.685] [Forge Version Check/INFO] [net.neoforged.fml.VersionChecker/]: [catalogue] Starting version check at https://mrcrayfish.com/modupdatejson?id=catalogue&loader=neoforge
+[29Aug2024 14:25:54.848] [Forge Version Check/WARN] [net.neoforged.fml.VersionChecker/]: Failed to process update information
+com.google.gson.JsonSyntaxException: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 1 path $
+	at com.google.gson.Gson.fromJson(Gson.java:1226) ~[gson-2.10.1.jar%23111!/:?]
+	at com.google.gson.Gson.fromJson(Gson.java:1124) ~[gson-2.10.1.jar%23111!/:?]
+	at com.google.gson.Gson.fromJson(Gson.java:1034) ~[gson-2.10.1.jar%23111!/:?]
+	at com.google.gson.Gson.fromJson(Gson.java:969) ~[gson-2.10.1.jar%23111!/:?]
+	at net.neoforged.fml.VersionChecker$1.process(VersionChecker.java:183) ~[loader-2.0.17.jar%23148!/:2.0]
+	at java.lang.Iterable.forEach(Iterable.java:75) ~[?:?]
+	at net.neoforged.fml.VersionChecker$1.run(VersionChecker.java:114) ~[loader-2.0.17.jar%23148!/:2.0]
+Caused by: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 1 path $
+	at com.google.gson.stream.JsonReader.beginObject(JsonReader.java:393) ~[gson-2.10.1.jar%23111!/:?]
+	at com.google.gson.internal.bind.MapTypeAdapterFactory$Adapter.read(MapTypeAdapterFactory.java:182) ~[gson-2.10.1.jar%23111!/:?]
+	at com.google.gson.internal.bind.MapTypeAdapterFactory$Adapter.read(MapTypeAdapterFactory.java:144) ~[gson-2.10.1.jar%23111!/:?]
+	at com.google.gson.Gson.fromJson(Gson.java:1214) ~[gson-2.10.1.jar%23111!/:?]
+	... 6 more
+[29Aug2024 14:25:54.849] [Forge Version Check/INFO] [net.neoforged.fml.VersionChecker/]: [refurbished_furniture] Starting version check at https://mrcrayfish.com/modupdatejson?id=refurbished_furniture
+[29Aug2024 14:25:54.931] [Render thread/INFO] [com.mojang.blaze3d.audio.Library/]: OpenAL initialized on device OpenAL Soft on Speakers (G560 Gaming Speaker Stereo)
+[29Aug2024 14:25:54.932] [Render thread/INFO] [net.minecraft.client.sounds.SoundEngine/SOUNDS]: Sound engine started
+[29Aug2024 14:25:55.112] [Forge Version Check/WARN] [net.neoforged.fml.VersionChecker/]: Failed to process update information
+com.google.gson.JsonSyntaxException: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 1 path $
+	at com.google.gson.Gson.fromJson(Gson.java:1226) ~[gson-2.10.1.jar%23111!/:?]
+	at com.google.gson.Gson.fromJson(Gson.java:1124) ~[gson-2.10.1.jar%23111!/:?]
+	at com.google.gson.Gson.fromJson(Gson.java:1034) ~[gson-2.10.1.jar%23111!/:?]
+	at com.google.gson.Gson.fromJson(Gson.java:969) ~[gson-2.10.1.jar%23111!/:?]
+	at net.neoforged.fml.VersionChecker$1.process(VersionChecker.java:183) ~[loader-2.0.17.jar%23148!/:2.0]
+	at java.lang.Iterable.forEach(Iterable.java:75) ~[?:?]
+	at net.neoforged.fml.VersionChecker$1.run(VersionChecker.java:114) ~[loader-2.0.17.jar%23148!/:2.0]
+Caused by: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 1 path $
+	at com.google.gson.stream.JsonReader.beginObject(JsonReader.java:393) ~[gson-2.10.1.jar%23111!/:?]
+	at com.google.gson.internal.bind.MapTypeAdapterFactory$Adapter.read(MapTypeAdapterFactory.java:182) ~[gson-2.10.1.jar%23111!/:?]
+	at com.google.gson.internal.bind.MapTypeAdapterFactory$Adapter.read(MapTypeAdapterFactory.java:144) ~[gson-2.10.1.jar%23111!/:?]
+	at com.google.gson.Gson.fromJson(Gson.java:1214) ~[gson-2.10.1.jar%23111!/:?]
+	... 6 more
+[29Aug2024 14:25:55.131] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 2048x1024x4 minecraft:textures/atlas/blocks.png-atlas
+[29Aug2024 14:25:55.163] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x4 minecraft:textures/atlas/signs.png-atlas
+[29Aug2024 14:25:55.164] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x512x4 minecraft:textures/atlas/banner_patterns.png-atlas
+[29Aug2024 14:25:55.165] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x512x4 minecraft:textures/atlas/shield_patterns.png-atlas
+[29Aug2024 14:25:55.167] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 64x64x4 refurbished_furniture:textures/atlas/tv_channels.png-atlas
+[29Aug2024 14:25:55.167] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 1024x1024x4 minecraft:textures/atlas/armor_trims.png-atlas
+[29Aug2024 14:25:55.174] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 128x64x4 minecraft:textures/atlas/decorated_pot.png-atlas
+[29Aug2024 14:25:55.175] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x4 minecraft:textures/atlas/chest.png-atlas
+[29Aug2024 14:25:55.175] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x4 minecraft:textures/atlas/beds.png-atlas
+[29Aug2024 14:25:55.176] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x4 minecraft:textures/atlas/shulker_boxes.png-atlas
+[29Aug2024 14:25:55.340] [Render thread/WARN] [net.minecraft.client.renderer.ShaderInstance/]: Shader rendertype_entity_translucent_emissive could not find sampler named Sampler2 in the specified shader program.
+[29Aug2024 14:25:55.419] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x0 minecraft:textures/atlas/particles.png-atlas
+[29Aug2024 14:25:55.422] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x0 minecraft:textures/atlas/paintings.png-atlas
+[29Aug2024 14:25:55.423] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 128x128x0 minecraft:textures/atlas/mob_effects.png-atlas
+[29Aug2024 14:25:55.423] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 1024x512x0 minecraft:textures/atlas/gui.png-atlas
+[29Aug2024 14:28:46.181] [Render thread/INFO] [net.minecraft.world.item.crafting.RecipeManager/]: Loaded 15 recipes
+[29Aug2024 14:28:46.455] [Render thread/INFO] [net.minecraft.advancements.AdvancementTree/]: Loaded 1983 advancements
+[29Aug2024 14:28:48.222] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Starting integrated minecraft server version 1.20.4
+[29Aug2024 14:28:48.222] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Generating keypair
+[29Aug2024 14:28:48.349] [Server thread/INFO] [Framework/]: Loading server configs...
+[29Aug2024 14:28:50.911] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Preparing start region for dimension minecraft:overworld
+[29Aug2024 14:28:54.458] [progressListener/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[29Aug2024 14:28:54.458] [progressListener/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[29Aug2024 14:28:54.458] [progressListener/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[29Aug2024 14:28:54.458] [progressListener/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[29Aug2024 14:28:54.458] [progressListener/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[29Aug2024 14:28:54.459] [progressListener/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[29Aug2024 14:28:54.459] [progressListener/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[29Aug2024 14:28:54.459] [progressListener/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[29Aug2024 14:28:54.916] [progressListener/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 19%
+[29Aug2024 14:28:55.415] [progressListener/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 87%
+[29Aug2024 14:28:55.494] [Server thread/INFO] [net.neoforged.neoforge.server.permission.PermissionAPI/]: Successfully initialized permission handler neoforge:default_handler
+[29Aug2024 14:28:55.507] [progressListener/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Time elapsed: 4595 ms
+[29Aug2024 14:28:55.936] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Changing view distance to 12, from 10
+[29Aug2024 14:28:55.936] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Changing simulation distance to 12, from 0
+[29Aug2024 14:28:56.661] [Server thread/INFO] [net.minecraft.server.players.PlayerList/]: Dev[local:E:2badfede] logged in with entity id 289 at (85.02502442090068, 78.0, -140.19061485436464)
+[29Aug2024 14:28:56.733] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Dev joined the game
+[29Aug2024 14:28:57.213] [Render thread/INFO] [net.minecraft.advancements.AdvancementTree/]: Loaded 2 advancements
+[29Aug2024 14:29:25.397] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Saving and pausing game...
+[29Aug2024 14:29:25.417] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[New World]'/minecraft:overworld
+[29Aug2024 14:29:25.464] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[New World]'/minecraft:the_end
+[29Aug2024 14:29:25.489] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[New World]'/minecraft:the_nether
+[29Aug2024 14:29:25.961] [Server thread/INFO] [net.minecraft.server.network.ServerGamePacketListenerImpl/]: Dev lost connection: Disconnected
+[29Aug2024 14:29:25.962] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Dev left the game
+[29Aug2024 14:29:25.979] [Server thread/INFO] [net.minecraft.server.network.ServerCommonPacketListenerImpl/]: Stopping singleplayer server as player logged out
+[29Aug2024 14:29:26.033] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Stopping server
+[29Aug2024 14:29:26.033] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving players
+[29Aug2024 14:29:26.033] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving worlds
+[29Aug2024 14:29:26.806] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[New World]'/minecraft:overworld
+[29Aug2024 14:29:27.155] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[New World]'/minecraft:the_end
+[29Aug2024 14:29:27.170] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[New World]'/minecraft:the_nether
+[29Aug2024 14:29:27.195] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (New World): All chunks are saved
+[29Aug2024 14:29:27.195] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[29Aug2024 14:29:27.195] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[29Aug2024 14:29:27.195] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage: All dimensions are saved
+[29Aug2024 14:29:27.245] [Server thread/INFO] [Framework/]: Unloading server configs...
+[29Aug2024 14:29:27.246] [Server thread/INFO] [Framework/]: Sending config unload event for refurbished_furniture.server.toml
+[29Aug2024 14:29:27.246] [Server thread/INFO] [Framework/]: Sending config unload event for mighty_mail.server.toml
+[29Aug2024 14:29:27.792] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Stopping!

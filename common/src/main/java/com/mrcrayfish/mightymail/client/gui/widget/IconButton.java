@@ -49,9 +49,9 @@ public class IconButton extends Button
         graphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
     }
 
-    @Override
+    /*@Override
     protected ClientTooltipPositioner createTooltipPositioner()
     {
         return DefaultTooltipPositioner.INSTANCE;
-    }
+    }*/
 }

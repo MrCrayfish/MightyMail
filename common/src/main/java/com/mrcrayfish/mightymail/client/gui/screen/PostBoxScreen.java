@@ -49,7 +49,8 @@ public class PostBoxScreen extends AbstractContainerScreen<PostBoxMenu>
     private static final MutableComponent DEFAULT_MAILBOX_NAME = Utils.translation("gui", "default_mailbox_name");
     private static final MutableComponent UNKNOWN_MAILBOX_OWNER = Utils.translation("gui", "unknown_mailbox_owner");
     private static final ResourceLocation POST_BOX_TEXTURE = Utils.resource("textures/gui/container/post_box.png");
-    private static final ResourceLocation VILLAGER_TEXTURE = new ResourceLocation("textures/gui/container/villager2.png");
+    private static final ResourceLocation SCROLLER_SPRITE = new ResourceLocation("container/villager/scroller");
+    private static final ResourceLocation SCROLLER_DISABLED_SPRITE = new ResourceLocation("container/villager/scroller_disabled");
     private static final Map<UUID, PlayerInfo> PLAYER_INFO_CACHE = new HashMap<>();
 
     private static final int SCROLL_SPEED = 5;
@@ -132,8 +133,6 @@ public class PostBoxScreen extends AbstractContainerScreen<PostBoxMenu>
     @Override
     protected void containerTick()
     {
-        this.searchEditBox.tick();
-        this.messageEditBox.tick();
         if(this.responseTranslationKey != null)
         {
             this.responseTimer++;
@@ -149,7 +148,6 @@ public class PostBoxScreen extends AbstractContainerScreen<PostBoxMenu>
     {
         this.sendButton.active = this.selected != null && !this.menu.getContainer().isEmpty();
         this.searchEditBox.setTextColor(this.searchEditBox.getValue().isEmpty() && !this.searchEditBox.isFocused() ? 0x707070 : 0xE0E0E0);
-        this.renderBackground(graphics);
         super.render(graphics, mouseX, mouseY, partialTick);
         this.renderTooltip(graphics, mouseX, mouseY);
     }
@@ -187,7 +185,7 @@ public class PostBoxScreen extends AbstractContainerScreen<PostBoxMenu>
             if(optional.isPresent())
             {
                 PlayerInfo info = this.getPlayerInfo(optional.get());
-                PlayerFaceRenderer.draw(graphics, info.getSkinLocation(), entryX + 3, entryY + 3, 8);
+                PlayerFaceRenderer.draw(graphics, info.getSkin(), entryX + 3, entryY + 3, 8);
             }
 
             // Draw the name of the mailbox
@@ -210,7 +208,7 @@ public class PostBoxScreen extends AbstractContainerScreen<PostBoxMenu>
         graphics.disableScissor();
 
         // Draw scroll bar
-        graphics.blit(VILLAGER_TEXTURE, this.leftPos + CONTAINER_LEFT + CONTAINER_WIDTH + 1, this.topPos + CONTAINER_TOP + this.getScrollBarOffset(mouseY), this.canScroll() ? 0 : SCROLL_BAR_WIDTH, 199, SCROLL_BAR_WIDTH, SCROLL_BAR_HEIGHT, 512, 256);
+        graphics.blitSprite(this.canScroll() ? SCROLLER_SPRITE : SCROLLER_DISABLED_SPRITE, this.leftPos + CONTAINER_LEFT + CONTAINER_WIDTH + 1, this.topPos + CONTAINER_TOP + this.getScrollBarOffset(mouseY), SCROLL_BAR_WIDTH, SCROLL_BAR_HEIGHT);
 
         // Draw icons in item slots
         for(int j = 0; j < 3; j++)
@@ -319,14 +317,14 @@ public class PostBoxScreen extends AbstractContainerScreen<PostBoxMenu>
     }
 
     @Override
-    public boolean mouseScrolled(double mouseX, double mouseY, double amount)
+    public boolean mouseScrolled(double mouseX, double mouseY, double deltaX, double deltaY)
     {
         if(this.isHovering(CONTAINER_LEFT, CONTAINER_TOP, CONTAINER_WIDTH, CONTAINER_HEIGHT, mouseX, mouseY))
         {
-            this.scroll((int) (-SCROLL_SPEED * amount));
+            this.scroll((int) (-SCROLL_SPEED * deltaY));
             return true;
         }
-        return super.mouseScrolled(mouseX, mouseY, amount);
+        return super.mouseScrolled(mouseX, mouseY, deltaX, deltaY);
     }
 
     /**

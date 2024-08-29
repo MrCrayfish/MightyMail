@@ -14,6 +14,7 @@ import com.mrcrayfish.mightymail.util.MailHelper;
 import com.mrcrayfish.mightymail.util.Utils;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
@@ -25,21 +26,21 @@ import javax.annotation.Nullable;
  */
 public class ServerPlayHandler
 {
-    public static void handleMessageSetMailboxName(MessageSetMailboxName message, @Nullable ServerPlayer player)
+    public static void handleMessageSetMailboxName(MessageSetMailboxName message, @Nullable Player player)
     {
-        if(player == null)
+        if(!(player instanceof ServerPlayer serverPlayer))
             return;
 
-        DeliveryService.get(player.server).ifPresent(service -> {
-            if(!service.renameMailbox(player, player.level(), message.getPos(), message.getName())) {
+        DeliveryService.get(serverPlayer.server).ifPresent(service -> {
+            if(!service.renameMailbox(player, player.level(), message.pos(), message.name())) {
                 player.sendSystemMessage(Utils.translation("gui", "rename_mailbox_failed"));
             }
         });
     }
 
-    public static void handleMessageSendPackage(MessageSendPackage message, @Nullable ServerPlayer player, MessageContext context)
+    public static void handleMessageSendPackage(MessageSendPackage message, @Nullable Player player, MessageContext context)
     {
-        if(player != null && player.containerMenu instanceof PostBoxMenu postBox)
+        if(player instanceof ServerPlayer serverPlayer && player.containerMenu instanceof PostBoxMenu postBox)
         {
             Container container = postBox.getContainer();
             if(container.isEmpty())
@@ -55,16 +56,16 @@ public class ServerPlayHandler
                 }
             }
 
-            DeliveryService.get(player.server).ifPresent(service -> {
-                ItemStack stack = PackageItem.create(container, message.getMessage(), player.getGameProfile().getName());
-                DeliveryResult result = service.sendMail(message.getMailboxId(), stack);
+            DeliveryService.get(serverPlayer.server).ifPresent(service -> {
+                ItemStack stack = PackageItem.create(container, message.message(), player.getGameProfile().getName());
+                DeliveryResult result = service.sendMail(message.mailboxId(), stack);
                 if(result.success()) {
                     container.clearContent();
-                    Network.getPlay().sendToPlayer(() -> player, new MessageClearMessage());
-                    Network.getPlay().sendToPlayer(() -> player, new MessageShowDeliveryResult(result));
+                    Network.getPlay().sendToPlayer(() -> serverPlayer, new MessageClearMessage());
+                    Network.getPlay().sendToPlayer(() -> serverPlayer, new MessageShowDeliveryResult(result));
                 } else {
                     result.message().ifPresent(s -> {
-                        Network.getPlay().sendToPlayer(() -> player, new MessageShowDeliveryResult(result));
+                        Network.getPlay().sendToPlayer(() -> serverPlayer, new MessageShowDeliveryResult(result));
                     });
                 }
             });

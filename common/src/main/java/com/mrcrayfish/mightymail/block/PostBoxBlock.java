@@ -2,6 +2,7 @@ package com.mrcrayfish.mightymail.block;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.mojang.serialization.MapCodec;
 import com.mrcrayfish.framework.api.FrameworkAPI;
 import com.mrcrayfish.mightymail.blockentity.PostBoxBlockEntity;
 import com.mrcrayfish.mightymail.mail.DeliveryService;
@@ -10,8 +11,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
@@ -20,6 +19,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.RenderShape;
@@ -39,6 +39,8 @@ import java.util.stream.Collectors;
  */
 public class PostBoxBlock extends RotatedBlock implements EntityBlock
 {
+    private static final MapCodec<PostBoxBlock> CODEC = simpleCodec(PostBoxBlock::new);
+
     private final Map<BlockState, VoxelShape> shapes;
 
     public PostBoxBlock(Properties properties)
@@ -46,6 +48,12 @@ public class PostBoxBlock extends RotatedBlock implements EntityBlock
         super(properties);
         this.registerDefaultState(this.getStateDefinition().any().setValue(DIRECTION, Direction.NORTH));
         this.shapes = this.generateShapes();
+    }
+
+    @Override
+    protected MapCodec<PostBoxBlock> codec()
+    {
+        return CODEC;
     }
 
     protected Map<BlockState, VoxelShape> generateShapes()

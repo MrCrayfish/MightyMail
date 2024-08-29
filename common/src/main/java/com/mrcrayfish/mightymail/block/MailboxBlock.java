@@ -2,6 +2,8 @@ package com.mrcrayfish.mightymail.block;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.mrcrayfish.mightymail.blockentity.MailboxBlockEntity;
 import com.mrcrayfish.mightymail.client.ScreenHooks;
 import com.mrcrayfish.mightymail.mail.DeliveryService;
@@ -20,14 +22,17 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.FurnaceBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -44,6 +49,8 @@ import java.util.stream.Collectors;
  */
 public class MailboxBlock extends RotatedBlock implements EntityBlock
 {
+    private static final MapCodec<MailboxBlock> CODEC = simpleCodec(MailboxBlock::new);
+
     public static final BooleanProperty ENABLED = BlockStateProperties.ENABLED;
 
     private final Map<BlockState, VoxelShape> shapes;
@@ -53,6 +60,12 @@ public class MailboxBlock extends RotatedBlock implements EntityBlock
         super(properties);
         this.registerDefaultState(this.getStateDefinition().any().setValue(DIRECTION, Direction.NORTH).setValue(ENABLED, false));
         this.shapes = this.generateShapes();
+    }
+
+    @Override
+    protected MapCodec<MailboxBlock> codec()
+    {
+        return CODEC;
     }
 
     protected Map<BlockState, VoxelShape> generateShapes()
