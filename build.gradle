@@ -13,5 +13,6 @@ tasks.register('incrementBuilds') {
         incrementBuild('/release_build_common');
         incrementBuild('/release_build_forge');
         incrementBuild('/release_build_fabric');
+        incrementBuild('/release_build_neoforge');
     }
 }
