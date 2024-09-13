@@ -3,7 +3,6 @@ package com.mrcrayfish.mightymail.network.message;
 import com.mrcrayfish.framework.api.network.MessageContext;
 import com.mrcrayfish.mightymail.network.play.ServerPlayHandler;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 

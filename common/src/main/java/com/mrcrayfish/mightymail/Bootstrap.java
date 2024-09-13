@@ -1,6 +1,5 @@
 package com.mrcrayfish.mightymail;
 
-import com.mrcrayfish.framework.api.event.PlayerEvents;
 import com.mrcrayfish.framework.api.event.ServerEvents;
 import com.mrcrayfish.framework.api.event.TickEvents;
 import com.mrcrayfish.mightymail.command.MigrateCommand;
@@ -9,7 +8,6 @@ import com.mrcrayfish.mightymail.item.PackageItem;
 import com.mrcrayfish.mightymail.mail.DeliveryService;
 import com.mrcrayfish.mightymail.network.Network;
 import net.minecraft.core.Direction;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Containers;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.DispenserBlock;

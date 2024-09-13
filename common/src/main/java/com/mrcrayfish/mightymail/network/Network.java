@@ -2,14 +2,12 @@ package com.mrcrayfish.mightymail.network;
 
 import com.mrcrayfish.framework.api.FrameworkAPI;
 import com.mrcrayfish.framework.api.network.FrameworkNetwork;
-import com.mrcrayfish.mightymail.Constants;
 import com.mrcrayfish.mightymail.network.message.MessageClearMessage;
 import com.mrcrayfish.mightymail.network.message.MessageSendPackage;
 import com.mrcrayfish.mightymail.network.message.MessageSetMailboxName;
 import com.mrcrayfish.mightymail.network.message.MessageShowDeliveryResult;
 import com.mrcrayfish.mightymail.util.Utils;
 import net.minecraft.network.protocol.PacketFlow;
-import net.minecraft.resources.ResourceLocation;
 
 /**
  * Author: MrCrayfish
