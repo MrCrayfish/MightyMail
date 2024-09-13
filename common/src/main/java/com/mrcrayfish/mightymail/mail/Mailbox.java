@@ -91,6 +91,7 @@ public record Mailbox(UUID id, ResourceKey<Level> levelKey, BlockPos pos, Mutabl
             if(blockEntity.deliverItem(stack))
             {
                 this.queue.remove();
+                this.service.setDirty();
             }
         }
         else
@@ -107,6 +108,7 @@ public record Mailbox(UUID id, ResourceKey<Level> levelKey, BlockPos pos, Mutabl
     {
         this.service.removeMailbox(this);
         this.removed.setValue(true);
+        this.service.setDirty();
     }
 
     /**
@@ -159,6 +161,7 @@ public record Mailbox(UUID id, ResourceKey<Level> levelKey, BlockPos pos, Mutabl
                 ItemStack stack = queue.poll();
                 Containers.dropItemStack(level, this.pos.getX(), this.pos.getY(), this.pos.getZ(), stack);
             }
+            this.service.setDirty();
         }
     }
 
