@@ -1,7 +1,7 @@
 package com.mrcrayfish.mightymail.client.gui.screen;
 
 import com.google.common.base.MoreObjects;
-import com.mrcrayfish.furniture.refurbished.util.Utils;
+import com.mrcrayfish.mightymail.util.Utils;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.EditBox;
