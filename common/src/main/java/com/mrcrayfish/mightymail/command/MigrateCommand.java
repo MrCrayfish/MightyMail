@@ -1,7 +1,6 @@
 package com.mrcrayfish.mightymail.command;
 
 import com.mojang.brigadier.CommandDispatcher;
-import com.mojang.brigadier.tree.LiteralCommandNode;
 import com.mrcrayfish.framework.platform.Services;
 import com.mrcrayfish.mightymail.block.MailboxBlock;
 import com.mrcrayfish.mightymail.blockentity.MailboxBlockEntity;
@@ -15,7 +14,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.Style;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -37,10 +35,6 @@ public class MigrateCommand
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher)
     {
-        // Only register if furniture mod is installed
-        if(!Services.PLATFORM.isModLoaded("refurbished_furniture"))
-            return;
-
         dispatcher.register(Commands.literal("mighty_mail:migrate")
             .requires(source -> source.hasPermission(2) && source.isPlayer())
             .executes(context -> {
