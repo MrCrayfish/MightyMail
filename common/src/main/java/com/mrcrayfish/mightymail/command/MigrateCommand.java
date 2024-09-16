@@ -35,10 +35,6 @@ public class MigrateCommand
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher)
     {
-        // Only register if furniture mod is installed
-        if(!Services.PLATFORM.isModLoaded("refurbished_furniture"))
-            return;
-
         dispatcher.register(Commands.literal("mighty_mail:migrate")
             .requires(source -> source.hasPermission(2) && source.isPlayer())
             .executes(context -> {

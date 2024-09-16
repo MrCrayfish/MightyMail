@@ -2,6 +2,7 @@ package com.mrcrayfish.mightymail;
 
 import com.mrcrayfish.framework.api.event.ServerEvents;
 import com.mrcrayfish.framework.api.event.TickEvents;
+import com.mrcrayfish.framework.platform.Services;
 import com.mrcrayfish.mightymail.command.MigrateCommand;
 import com.mrcrayfish.mightymail.core.ModItems;
 import com.mrcrayfish.mightymail.item.PackageItem;
@@ -23,7 +24,10 @@ public class Bootstrap
         Network.init();
         TickEvents.START_SERVER.register(server -> DeliveryService.get(server).ifPresent(DeliveryService::serverTick));
         ServerEvents.STARTING.register(server -> {
-            MigrateCommand.register(server.getCommands().getDispatcher());
+            // Only register if furniture mod is installed
+            if(Services.PLATFORM.isModLoaded("refurbished_furniture")) {
+                MigrateCommand.register(server.getCommands().getDispatcher());
+            }
         });
         DispenserBlock.registerBehavior(ModItems.PACKAGE::get, (source, stack) -> {
             Direction direction = source.state().getValue(DispenserBlock.FACING);
