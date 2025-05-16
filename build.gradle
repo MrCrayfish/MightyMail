@@ -5,18 +5,3 @@ plugins {
     id 'net.neoforged.gradle.userdev' version '7.0.167' apply false
     id 'net.minecraftforge.gradle' version '[6.0,6.2)' apply false
 }
-
-def incrementBuild(path) {
-    var buildFile = file(path);
-    int version = buildFile.text.toInteger()
-    buildFile.text = version + 1
-}
-
-tasks.register('incrementBuilds') {
-    doLast {
-        incrementBuild('/release_build_common');
-        incrementBuild('/release_build_forge');
-        incrementBuild('/release_build_fabric');
-        incrementBuild('/release_build_neoforge');
-    }
-}
