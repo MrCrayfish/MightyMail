@@ -31,7 +31,7 @@ public class LootTableGen extends LootTableProvider
         }
 
         @Override
-        protected void generate() {}
+        public void generate() {}
 
         @Override
         public void generate(BiConsumer<ResourceKey<LootTable>, LootTable.Builder> consumer)
