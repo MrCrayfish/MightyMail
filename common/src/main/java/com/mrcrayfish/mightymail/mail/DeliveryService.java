@@ -6,8 +6,10 @@ import com.mrcrayfish.mightymail.Config;
 import com.mrcrayfish.mightymail.Constants;
 import com.mrcrayfish.mightymail.blockentity.MailboxBlockEntity;
 import com.mrcrayfish.mightymail.client.ClientMailbox;
+import com.mrcrayfish.mightymail.inventory.PostBoxMenu;
 import com.mrcrayfish.mightymail.util.Utils;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -25,8 +27,8 @@ import net.minecraft.world.level.saveddata.SavedData;
 import org.apache.commons.lang3.mutable.MutableBoolean;
 import org.apache.commons.lang3.mutable.MutableObject;
 import org.apache.commons.lang3.tuple.Pair;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.ArrayDeque;
 import java.util.Collections;
 import java.util.HashMap;
@@ -57,7 +59,7 @@ public class DeliveryService extends SavedData
 
     public static SavedData.Factory<DeliveryService> createFactory(MinecraftServer server)
     {
-        return new SavedData.Factory<>(() -> new DeliveryService(server), tag -> new DeliveryService(server, tag), DataFixTypes.SAVED_DATA_FORCED_CHUNKS);
+        return new SavedData.Factory<>(() -> new DeliveryService(server), (tag, provider) -> new DeliveryService(server, tag, provider), DataFixTypes.SAVED_DATA_FORCED_CHUNKS);
     }
 
     private final MinecraftServer server;
@@ -68,13 +70,13 @@ public class DeliveryService extends SavedData
 
     public DeliveryService(MinecraftServer server)
     {
-        this(server, new CompoundTag());
+        this.server = server;
     }
 
-    public DeliveryService(MinecraftServer server, CompoundTag compound)
+    public DeliveryService(MinecraftServer server, CompoundTag compound, HolderLookup.Provider provider)
     {
         this.server = server;
-        this.load(compound);
+        this.load(compound, provider);
     }
 
     /**
@@ -229,16 +231,9 @@ public class DeliveryService extends SavedData
     /**
      * Encodes the mailboxes to a FriendlyByteBuf
      */
-    public void encodeMailboxes(FriendlyByteBuf buf)
+    public PostBoxMenu.CustomData createPostBoxData()
     {
-        buf.writeCollection(this.mailboxes.values(), (buf1, mailbox) -> {
-            buf1.writeUUID(mailbox.getId());
-            buf1.writeOptional(mailbox.getOwner(), (buf2, profile) -> {
-                buf2.writeUUID(profile.getId());
-                buf2.writeOptional(Optional.ofNullable(profile.getName()), FriendlyByteBuf::writeUtf);
-            });
-            buf1.writeOptional(mailbox.getCustomName(), FriendlyByteBuf::writeUtf);
-        });
+        return new PostBoxMenu.CustomData(List.copyOf(this.mailboxes.values()));
     }
 
     /**
@@ -263,7 +258,7 @@ public class DeliveryService extends SavedData
         return ImmutableList.copyOf(list);
     }
 
-    private void load(CompoundTag compound)
+    private void load(CompoundTag compound, HolderLookup.Provider provider)
     {
         if(compound.contains("Mailboxes", Tag.TAG_LIST))
         {
@@ -275,7 +270,7 @@ public class DeliveryService extends SavedData
                     CompoundTag mailboxTag = (CompoundTag) tag;
                     ResourceKey<Level> levelKey = createLevelKey(mailboxTag.getString("Level"));
                     if(levelKey == null)
-                    {
+{
                         Constants.LOG.error("Failed to load a mailbox due to invalid dimension");
                         return;
                     }
@@ -288,7 +283,7 @@ public class DeliveryService extends SavedData
                     }
                     String customName = mailboxTag.getString("CustomName");
                     customName = customName.substring(0, Math.min(customName.length(), 32));
-                    Queue<ItemStack> queue = Mailbox.readQueueListTag(mailboxTag);
+                    Queue<ItemStack> queue = Mailbox.readQueueListTag(mailboxTag, provider);
                     Mailbox mailbox = new Mailbox(id, levelKey, pos, owner, new MutableObject<>(customName), queue, new MutableBoolean(), this);
                     this.mailboxes.putIfAbsent(id, mailbox);
                     this.locator.put(Pair.of(levelKey.location(), pos), mailbox);
@@ -302,7 +297,7 @@ public class DeliveryService extends SavedData
     }
 
     @Override
-    public CompoundTag save(CompoundTag compound)
+    public CompoundTag save(CompoundTag compound, HolderLookup.Provider provider)
     {
         ListTag list = new ListTag();
         this.mailboxes.forEach((uuid, mailbox) ->
@@ -315,7 +310,7 @@ public class DeliveryService extends SavedData
                 mailboxTag.putLong("BlockPosition", mailbox.pos().asLong());
                 Optional.ofNullable(mailbox.owner().getValue()).ifPresent(id -> mailboxTag.putUUID("Owner", id));
                 Optional.ofNullable(mailbox.customName().getValue()).ifPresent(name -> mailboxTag.putString("CustomName", name));
-                mailbox.writeQueue(mailboxTag);
+                mailbox.writeQueue(mailboxTag, provider);
                 list.add(mailboxTag);
             }
         });
@@ -338,7 +333,7 @@ public class DeliveryService extends SavedData
             case "minecraft:overworld" -> Level.OVERWORLD;
             case "minecraft:the_nether" -> Level.NETHER;
             case "minecraft:the_end" -> Level.END;
-            default -> ResourceKey.create(Registries.DIMENSION, new ResourceLocation(levelKey));
+            default -> ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse(levelKey));
         };
     }
 

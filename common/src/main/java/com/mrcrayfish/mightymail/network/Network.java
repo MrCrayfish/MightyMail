@@ -7,6 +7,7 @@ import com.mrcrayfish.mightymail.network.message.MessageClearMessage;
 import com.mrcrayfish.mightymail.network.message.MessageSendPackage;
 import com.mrcrayfish.mightymail.network.message.MessageSetMailboxName;
 import com.mrcrayfish.mightymail.network.message.MessageShowDeliveryResult;
+import com.mrcrayfish.mightymail.util.Utils;
 import net.minecraft.network.protocol.PacketFlow;
 import net.minecraft.resources.ResourceLocation;
 
@@ -16,11 +17,11 @@ import net.minecraft.resources.ResourceLocation;
 public class Network
 {
     public static final FrameworkNetwork PLAY = FrameworkAPI
-            .createNetworkBuilder(new ResourceLocation(Constants.MOD_ID, "play"), 1)
-            .registerPlayMessage("set_mailbox_name", MessageSetMailboxName.class, MessageSetMailboxName::encode, MessageSetMailboxName::decode, MessageSetMailboxName::handle, PacketFlow.SERVERBOUND)
-            .registerPlayMessage("send_package", MessageSendPackage.class, MessageSendPackage::encode, MessageSendPackage::decode, MessageSendPackage::handle, PacketFlow.SERVERBOUND)
-            .registerPlayMessage("clear_message", MessageClearMessage.class, MessageClearMessage::encode, MessageClearMessage::decode, MessageClearMessage::handle, PacketFlow.CLIENTBOUND)
-            .registerPlayMessage("show_delivery_result", MessageShowDeliveryResult.class, MessageShowDeliveryResult::encode, MessageShowDeliveryResult::decode, MessageShowDeliveryResult::handle, PacketFlow.CLIENTBOUND)
+            .createNetworkBuilder(Utils.resource("play"), 1)
+            .registerPlayMessage("set_mailbox_name", MessageSetMailboxName.class, MessageSetMailboxName.STREAM_CODEC, MessageSetMailboxName::handle, PacketFlow.SERVERBOUND)
+            .registerPlayMessage("send_package", MessageSendPackage.class, MessageSendPackage.STREAM_CODEC, MessageSendPackage::handle, PacketFlow.SERVERBOUND)
+            .registerPlayMessage("clear_message", MessageClearMessage.class, MessageClearMessage.STREAM_CODEC, MessageClearMessage::handle, PacketFlow.CLIENTBOUND)
+            .registerPlayMessage("show_delivery_result", MessageShowDeliveryResult.class, MessageShowDeliveryResult.STREAM_CODEC, MessageShowDeliveryResult::handle, PacketFlow.CLIENTBOUND)
             .build();
 
     public static void init() {}

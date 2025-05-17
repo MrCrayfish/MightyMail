@@ -82,8 +82,8 @@ repositories {
 
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
-    implementation fg.deobf("curse.maven:framework-549225:5386324") // Temp until I fix POM
-    implementation fg.deobf("curse.maven:refurbished-furniture-897116:5651941") // Temp until I fix POM
+    implementation "curse.maven:framework-549225:5692404" // Temp until I fix POM
+    implementation "curse.maven:refurbished-furniture-897116:5705553" // Temp until I fix POM
     annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
 }
 

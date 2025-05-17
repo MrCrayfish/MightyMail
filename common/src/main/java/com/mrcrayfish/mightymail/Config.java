@@ -63,7 +63,7 @@ public class Config
         public final ListProperty<String> allowedDimensions = ListProperty.create(ListProperty.STRING, new Validator<>() {
             @Override
             public boolean test(String value) {
-                return ResourceLocation.isValidResourceLocation(value);
+                return ResourceLocation.read(value).isSuccess();
             }
             @Override
             public Component getHint() {

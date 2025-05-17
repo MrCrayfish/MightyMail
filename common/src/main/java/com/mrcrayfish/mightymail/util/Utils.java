@@ -21,7 +21,7 @@ public class Utils
      */
     public static ResourceLocation resource(String name)
     {
-        return new ResourceLocation(Constants.MOD_ID, name);
+        return ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, name);
     }
 
     public static String translationKey(String category, String path)

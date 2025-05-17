@@ -3,6 +3,7 @@ package com.mrcrayfish.mightymail.mail;
 import com.mojang.authlib.GameProfile;
 import com.mrcrayfish.mightymail.blockentity.MailboxBlockEntity;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -113,10 +114,10 @@ public record Mailbox(UUID id, ResourceKey<Level> levelKey, BlockPos pos, Mutabl
      *
      * @param compound the compound tag to save the data into
      */
-    public void writeQueue(CompoundTag compound)
+    public void writeQueue(CompoundTag compound, HolderLookup.Provider provider)
     {
         ListTag list = new ListTag();
-        this.queue.forEach(stack -> list.add(stack.save(new CompoundTag())));
+        this.queue.forEach(stack -> list.add(stack.save(provider)));
         compound.put("Queue", list);
     }
 
@@ -126,13 +127,18 @@ public record Mailbox(UUID id, ResourceKey<Level> levelKey, BlockPos pos, Mutabl
      * @param compound the compound tag to read the data from
      * @return a new ItemStack Queue
      */
-    public static Queue<ItemStack> readQueueListTag(CompoundTag compound)
+    public static Queue<ItemStack> readQueueListTag(CompoundTag compound, HolderLookup.Provider provider)
     {
         if(compound.contains("Queue", Tag.TAG_LIST))
         {
             Queue<ItemStack> queue = new ArrayDeque<>();
             ListTag list = compound.getList("Queue", Tag.TAG_COMPOUND);
-            list.forEach(tag -> queue.offer(ItemStack.of((CompoundTag) tag)));
+            list.forEach(tag -> {
+                ItemStack stack = ItemStack.parseOptional(provider, (CompoundTag) tag);
+                if(!stack.isEmpty()) {
+                    queue.offer(stack);
+                }
+            });
             return queue;
         }
         return new ArrayDeque<>();
