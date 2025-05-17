@@ -22,7 +22,7 @@ public class RecipeGen extends RecipeProvider
     }
 
     @Override
-    protected void buildRecipes(RecipeOutput output)
+    public void buildRecipes(RecipeOutput output)
     {
         this.mailbox(output, ModBlocks.MAIL_BOX_OAK.get(), Blocks.OAK_PLANKS, Blocks.OAK_FENCE);
         this.mailbox(output, ModBlocks.MAIL_BOX_SPRUCE.get(), Blocks.SPRUCE_PLANKS, Blocks.SPRUCE_FENCE);

@@ -19,8 +19,9 @@ import java.util.concurrent.CompletableFuture;
 @Mod(Constants.MOD_ID)
 public class MightyMail
 {
-    public MightyMail(IEventBus bus)
+    public MightyMail()
     {
+        IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         bus.addListener(this::onCommonSetup);
         bus.addListener(this::onClientSetup);
         bus.addListener(this::onGatherData);
