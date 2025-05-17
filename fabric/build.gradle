@@ -11,7 +11,7 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
     modImplementation "com.mrcrayfish:framework-fabric:${minecraft_version}-${framework_version}"
-    modRuntimeOnly "com.mrcrayfish:refurbished_furniture-fabric:${minecraft_version}-${refurbished_furniture}"
+    modImplementation "com.mrcrayfish:refurbished_furniture-fabric:${minecraft_version}-${refurbished_furniture}"
 }
 
 sourceSets.main.resources.srcDir 'src/generated/resources'

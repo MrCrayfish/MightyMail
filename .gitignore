@@ -22,6 +22,7 @@ build
 eclipse
 run
 
+/forge/run
 /neoforge/runs
-/forge/runs
 /fabric/runs
+*/src/generated

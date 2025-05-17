@@ -51,6 +51,27 @@ jobs:
           echo "KEYSTORE_PASS=${{ secrets.MRCRAYFISH_JKS_PASSPHRASE }}" >> $GITHUB_ENV
       - name: Make gradlew executable
         run: chmod +x ./gradlew
+      - name: Data Generation (NeoForge)
+        env:
+          GPR_USER: "MrCrayfish"
+          GPR_KEY: ${{ secrets.GPR_TOKEN }}
+          PACKAGES_REPO: ${{ vars.PACKAGES_REPOSITORY }}
+          TARGET_LOADER: "neoforge"
+        run: ./gradlew :neoforge:runData
+      - name: Data Generation (Forge)
+        env:
+          GPR_USER: "MrCrayfish"
+          GPR_KEY: ${{ secrets.GPR_TOKEN }}
+          PACKAGES_REPO: ${{ vars.PACKAGES_REPOSITORY }}
+          TARGET_LOADER: "forge"
+        run: ./gradlew :forge:Data
+      - name: Data Generation (Fabric)
+        env:
+          GPR_USER: "MrCrayfish"
+          GPR_KEY: ${{ secrets.GPR_TOKEN }}
+          PACKAGES_REPO: ${{ vars.PACKAGES_REPOSITORY }}
+          TARGET_LOADER: "fabric"
+        run: ./gradlew :fabric:runDatagen
       - name: Build (Common)
         env:
           GPR_USER: "MrCrayfish"

@@ -82,7 +82,7 @@ repositories {
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     implementation "com.mrcrayfish:framework-forge:${minecraft_version}-${framework_version}"
-    runtimeOnly "com.mrcrayfish:refurbished_furniture-forge:${minecraft_version}-${refurbished_furniture}"
+    implementation "com.mrcrayfish:refurbished_furniture-forge:${minecraft_version}-${refurbished_furniture}"
 }
 
 jar.finalizedBy('reobfJar')
