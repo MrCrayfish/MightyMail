@@ -20,6 +20,7 @@ fabricApi {
     configureDataGeneration {
         client = true
         outputDirectory.set(file("src/generated"))
+        modId = "${mod_id}"
     }
 }
 
