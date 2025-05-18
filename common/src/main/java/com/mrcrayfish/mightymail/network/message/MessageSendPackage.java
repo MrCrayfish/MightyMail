@@ -1,6 +1,7 @@
 package com.mrcrayfish.mightymail.network.message;
 
 import com.mrcrayfish.framework.api.network.MessageContext;
+import com.mrcrayfish.framework.api.network.PlayMessageContext;
 import com.mrcrayfish.mightymail.network.play.ServerPlayHandler;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
@@ -20,7 +21,7 @@ public record MessageSendPackage(UUID mailboxId, String message)
         return new MessageSendPackage(buf.readUUID(), buf.readUtf());
     });
 
-    public static void handle(MessageSendPackage message, MessageContext context)
+    public static void handle(MessageSendPackage message, PlayMessageContext context)
     {
         context.execute(() -> ServerPlayHandler.handleMessageSendPackage(message, context.getPlayer().orElse(null), context));
         context.setHandled(true);

@@ -2,6 +2,7 @@ package com.mrcrayfish.mightymail.network;
 
 import com.mrcrayfish.framework.api.FrameworkAPI;
 import com.mrcrayfish.framework.api.network.FrameworkNetwork;
+import com.mrcrayfish.framework.api.registry.RegistryContainer;
 import com.mrcrayfish.mightymail.network.message.MessageClearMessage;
 import com.mrcrayfish.mightymail.network.message.MessageSendPackage;
 import com.mrcrayfish.mightymail.network.message.MessageSetMailboxName;
@@ -12,6 +13,7 @@ import net.minecraft.network.protocol.PacketFlow;
 /**
  * Author: MrCrayfish
  */
+@RegistryContainer
 public class Network
 {
     public static final FrameworkNetwork PLAY = FrameworkAPI
@@ -21,8 +23,6 @@ public class Network
             .registerPlayMessage("clear_message", MessageClearMessage.class, MessageClearMessage.STREAM_CODEC, MessageClearMessage::handle, PacketFlow.CLIENTBOUND)
             .registerPlayMessage("show_delivery_result", MessageShowDeliveryResult.class, MessageShowDeliveryResult.STREAM_CODEC, MessageShowDeliveryResult::handle, PacketFlow.CLIENTBOUND)
             .build();
-
-    public static void init() {}
 
     public static FrameworkNetwork getPlay()
     {

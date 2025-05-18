@@ -30,7 +30,7 @@ public class Config
 
         @ConfigProperty(name = "mailQueueSize", comment = """
             The maximum amount of items that can be queued for delivery for a mail box""")
-        public final IntProperty mailQueueSize = IntProperty.create(18, 0, 256);
+        public final IntProperty deliveryQueueSize = IntProperty.create(18, 0, 256);
 
         @ConfigProperty(name = "banSendingItemsWithInventories", comment = """
             If enabled, this will ban items with an inventory (like a Shulker Box) being sent through

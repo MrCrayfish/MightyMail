@@ -51,7 +51,7 @@ public class LootTableGen extends LootTableProvider
 
         private void drop(BiConsumer<ResourceKey<LootTable>, LootTable.Builder> consumer, Block block)
         {
-            consumer.accept(block.getLootTable(), this.createSingleItemTable(block));
+            consumer.accept(block.getLootTable().orElseThrow(), this.createSingleItemTable(block));
         }
     }
 }

@@ -12,5 +12,5 @@ import net.minecraft.world.item.Item;
 @RegistryContainer
 public class ModItems
 {
-    public static final RegistryEntry<Item> PACKAGE = RegistryEntry.item(Utils.resource("package"), () -> new PackageItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryEntry<Item> PACKAGE = RegistryEntry.item(Utils.resource("package"), PackageItem::new, () -> new Item.Properties().stacksTo(1));
 }

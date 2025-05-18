@@ -28,6 +28,20 @@ loom {
     if (aw.exists()) {
         accessWidenerPath.set(aw)
     }
+    runs {
+        client {
+            name("Fabric: Client")
+            ideConfigGenerated(true)
+        }
+        server {
+            name("Fabric: Server")
+            ideConfigGenerated(true)
+        }
+        datagen {
+            name("Fabric: Data")
+            ideConfigGenerated(true)
+        }
+    }
 }
 
 tasks.register("signJar") {

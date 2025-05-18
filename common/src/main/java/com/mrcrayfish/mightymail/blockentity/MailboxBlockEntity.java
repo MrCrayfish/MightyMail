@@ -8,8 +8,8 @@ import com.mrcrayfish.mightymail.mail.Mailbox;
 import com.mrcrayfish.mightymail.util.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.UUIDUtil;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Inventory;
@@ -151,9 +151,9 @@ public class MailboxBlockEntity extends BasicLootBlockEntity
     public void loadAdditional(CompoundTag tag, HolderLookup.Provider provider)
     {
         super.loadAdditional(tag, provider);
-        if(tag.contains("UUID", Tag.TAG_INT_ARRAY))
+        if(tag.contains("UUID"))
         {
-            this.uuid = tag.getUUID("UUID");
+            this.uuid = tag.read("UUID", UUIDUtil.CODEC).orElse(UUID.randomUUID());
         }
     }
 
@@ -161,6 +161,19 @@ public class MailboxBlockEntity extends BasicLootBlockEntity
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider provider)
     {
         super.saveAdditional(tag, provider);
-        tag.putUUID("UUID", this.uuid);
+        tag.store("UUID", UUIDUtil.CODEC, this.uuid);
+    }
+
+    @Override
+    public void preRemoveSideEffects(BlockPos pos, BlockState state)
+    {
+        super.preRemoveSideEffects(pos, state);
+        Optional.ofNullable(this.getMailbox()).ifPresent(Mailbox::remove);
+    }
+
+    public void regenerateId()
+    {
+        this.uuid = UUID.randomUUID();
+        this.setChanged();
     }
 }

@@ -5,14 +5,13 @@ import com.google.common.collect.ImmutableMap;
 import com.mojang.serialization.MapCodec;
 import com.mrcrayfish.framework.api.FrameworkAPI;
 import com.mrcrayfish.mightymail.blockentity.PostBoxBlockEntity;
+import com.mrcrayfish.mightymail.inventory.PostBoxMenu;
 import com.mrcrayfish.mightymail.mail.DeliveryService;
 import com.mrcrayfish.mightymail.util.VoxelShapeHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.Container;
-import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -90,26 +89,12 @@ public class PostBoxBlock extends RotatedBlock implements EntityBlock
     }
 
     @Override
-    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving)
-    {
-        if(!state.is(newState.getBlock()))
-        {
-            if(level.getBlockEntity(pos) instanceof Container container)
-            {
-                Containers.dropContents(level, pos, container);
-                level.updateNeighbourForOutputSignal(pos, this);
-            }
-        }
-        super.onRemove(state, level, pos, newState, isMoving);
-    }
-
-    @Override
     public InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult result)
     {
         if(!level.isClientSide() && level.getBlockEntity(pos) instanceof PostBoxBlockEntity postBox)
         {
             DeliveryService.get(((ServerLevel) level).getServer()).ifPresent(service -> {
-                FrameworkAPI.openMenuWithData((ServerPlayer) player, postBox, service.createPostBoxData());
+                FrameworkAPI.openMenuWithData((ServerPlayer) player, postBox, new PostBoxMenu.CustomData(service.getMailboxes()));
             });
             return InteractionResult.CONSUME;
         }

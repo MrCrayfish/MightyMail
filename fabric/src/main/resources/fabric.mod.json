@@ -43,7 +43,8 @@
         },
         "framework": {
             "containers": [
-                "com.mrcrayfish.mightymail.core"
+                "com.mrcrayfish.mightymail.core",
+                "com.mrcrayfish.mightymail.network"
             ],
             "configs": [
                 "com.mrcrayfish.mightymail.Config"

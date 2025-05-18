@@ -36,7 +36,7 @@ public class ScreenHelper
     {
         if(!lines.isEmpty())
         {
-            Tooltip tooltip = Tooltip.create(lines.get(0));
+            Tooltip tooltip = Tooltip.create(lines.getFirst());
             List<FormattedCharSequence> sequences = lines.stream().map(c -> Minecraft.getInstance().font.split(c, 170)).flatMap(Collection::stream).toList();
             ClientServices.PLATFORM.setTooltipCache(tooltip, sequences);
             return tooltip;

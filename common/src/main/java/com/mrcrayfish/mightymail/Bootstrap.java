@@ -1,7 +1,7 @@
 package com.mrcrayfish.mightymail;
 
-import com.mrcrayfish.framework.api.event.ServerEvents;
-import com.mrcrayfish.framework.api.event.TickEvents;
+import com.mrcrayfish.framework.api.event.FrameworkServerEvents;
+import com.mrcrayfish.framework.api.event.FrameworkTickEvents;
 import com.mrcrayfish.framework.platform.Services;
 import com.mrcrayfish.mightymail.command.MigrateCommand;
 import com.mrcrayfish.mightymail.core.ModItems;
@@ -21,9 +21,8 @@ public class Bootstrap
 {
     public static void init()
     {
-        Network.init();
-        TickEvents.START_SERVER.register(server -> DeliveryService.get(server).ifPresent(DeliveryService::serverTick));
-        ServerEvents.STARTING.register(server -> {
+        FrameworkTickEvents.START_SERVER.register(server -> DeliveryService.get(server).ifPresent(DeliveryService::serverTick));
+        FrameworkServerEvents.STARTING.register(server -> {
             // Only register if furniture mod is installed
             if(Services.PLATFORM.isModLoaded("refurbished_furniture")) {
                 MigrateCommand.register(server.getCommands().getDispatcher());

@@ -1,6 +1,7 @@
 package com.mrcrayfish.mightymail.network.message;
 
 import com.mrcrayfish.framework.api.network.MessageContext;
+import com.mrcrayfish.framework.api.network.PlayMessageContext;
 import com.mrcrayfish.mightymail.network.play.ServerPlayHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -20,7 +21,7 @@ public record MessageSetMailboxName(BlockPos pos, String name)
         return new MessageSetMailboxName(pos, name);
     });
 
-    public static void handle(MessageSetMailboxName message, MessageContext context)
+    public static void handle(MessageSetMailboxName message, PlayMessageContext context)
     {
         context.execute(() -> ServerPlayHandler.handleMessageSetMailboxName(message, context.getPlayer().orElse(null)));
         context.setHandled(true);

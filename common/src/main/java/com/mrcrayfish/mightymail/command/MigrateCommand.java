@@ -6,6 +6,8 @@ import com.mrcrayfish.mightymail.block.MailboxBlock;
 import com.mrcrayfish.mightymail.blockentity.MailboxBlockEntity;
 import com.mrcrayfish.mightymail.core.ModBlocks;
 import com.mrcrayfish.mightymail.mail.DeliveryService;
+import com.mrcrayfish.mightymail.mail.IMailbox;
+import com.mrcrayfish.mightymail.mail.Mailbox;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.commands.CommandSourceStack;
@@ -42,7 +44,7 @@ public class MigrateCommand
                 if(player != null) {
                     PENDING.put(player.getUUID(), Util.getMillis());
                     MutableComponent link = Component.literal("CONFIRM");
-                    link.setStyle(link.getStyle().withBold(true).withColor(ChatFormatting.AQUA).withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/mighty_mail:confirm")));
+                    link.setStyle(link.getStyle().withBold(true).withColor(ChatFormatting.AQUA).withClickEvent(new ClickEvent.RunCommand("/mighty_mail:confirm")));
                     context.getSource().sendSuccess(() -> Component.literal("This is an irreversible action. Click ").append(link).append(" to start action."), false);
                     return 1;
                 }
@@ -88,21 +90,24 @@ public class MigrateCommand
         }
 
         AtomicInteger counter = new AtomicInteger(0);
-        service.getMailboxes().forEach((uuid, mailbox) ->
+        for(IMailbox iMailbox : service.getMailboxes())
         {
+            if(!(iMailbox instanceof Mailbox mailbox))
+                continue;
+
             // Get the level of the mailbox
             ServerLevel level = server.getLevel(mailbox.levelKey());
             if(level == null)
-                return;
+                continue;
 
             // Get the block entity
             BlockEntity entity = level.getBlockEntity(mailbox.pos());
             if(!(entity instanceof MailboxBlockEntity))
-                return;
+                continue;
 
             BlockState state = level.getBlockState(mailbox.pos());
             if(!(state.getBlock() instanceof MailboxBlock))
-                return;
+                continue;
 
             // Get the properties of the mighty mail mailbox
             Direction direction = state.getValue(MailboxBlock.DIRECTION);
@@ -148,7 +153,7 @@ public class MigrateCommand
             }
             else
             {
-                return;
+                continue;
             }
 
             // Set the new blockstate
@@ -169,7 +174,7 @@ public class MigrateCommand
 
             // Count
             counter.incrementAndGet();
-        });
+        }
 
         source.sendSuccess(() ->Component.literal("Successfully migrated %s mailboxes".formatted(counter.get())).withStyle(ChatFormatting.GREEN), false);
 

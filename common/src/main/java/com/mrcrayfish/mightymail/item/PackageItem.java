@@ -16,16 +16,17 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.ItemContainerContents;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * Author: MrCrayfish
@@ -44,25 +45,25 @@ public class PackageItem extends Item
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> lines, TooltipFlag flag)
+    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> lines, TooltipFlag flag)
     {
         PackageInfo info = stack.get(ModDataComponents.PACKAGE_INFO.get());
         if(info != null)
         {
             info.sender().ifPresent(s -> {
-                lines.add(Utils.translation("gui", "package_sent_by", s).withStyle(ChatFormatting.AQUA));
+                lines.accept(Utils.translation("gui", "package_sent_by", s).withStyle(ChatFormatting.AQUA));
             });
             info.message().ifPresent(s -> {
                 TaskRunner.runIf(Environment.CLIENT, () -> () -> {
-                    ScreenHelper.splitText(s, 170).forEach(component -> lines.add(component.withStyle(ChatFormatting.GRAY)));
+                    ScreenHelper.splitText(s, 170).forEach(component -> lines.accept(component.withStyle(ChatFormatting.GRAY)));
                 });
             });
         }
-        lines.add(Utils.translation("gui", "package_open").withStyle(ChatFormatting.YELLOW));
+        lines.accept(Utils.translation("gui", "package_open").withStyle(ChatFormatting.YELLOW));
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand)
+    public InteractionResult use(Level level, Player player, InteractionHand hand)
     {
         ItemStack stack = player.getItemInHand(hand);
         if(!level.isClientSide())
@@ -72,7 +73,7 @@ public class PackageItem extends Item
             getPackagedItems(stack).stream().forEach(s -> Containers.dropItemStack(level, player.getX(), player.getY(), player.getZ(), s));
             player.setItemInHand(hand, ItemStack.EMPTY);
         }
-        return InteractionResultHolder.sidedSuccess(stack, level.isClientSide());
+        return InteractionResult.SUCCESS;
     }
 
     /**

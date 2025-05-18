@@ -6,60 +6,63 @@ import com.mrcrayfish.mightymail.Config;
 import com.mrcrayfish.mightymail.Constants;
 import com.mrcrayfish.mightymail.blockentity.MailboxBlockEntity;
 import com.mrcrayfish.mightymail.client.ClientMailbox;
-import com.mrcrayfish.mightymail.inventory.PostBoxMenu;
 import com.mrcrayfish.mightymail.util.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.UUIDUtil;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.Tag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.datafix.DataFixTypes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.saveddata.SavedData;
+import net.minecraft.world.level.saveddata.SavedDataType;
 import org.apache.commons.lang3.mutable.MutableBoolean;
 import org.apache.commons.lang3.mutable.MutableObject;
 import org.apache.commons.lang3.tuple.Pair;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayDeque;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Queue;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+
+// TODO require ender pearl to send items
 
 /**
  * Author: MrCrayfish
  */
 public class DeliveryService extends SavedData
 {
-    private static final String STORAGE_ID = "mighty_mail_delivery_service";
+    @SuppressWarnings("DataFlowIssue")
+    private static final SavedDataType<DeliveryService> TYPE = new SavedDataType<>("mighty_mail_delivery_service", context -> {
+        return new DeliveryService(context.levelOrThrow().getServer());
+    }, context -> {
+        return CompoundTag.CODEC.xmap(tag -> {
+            ServerLevel level = context.levelOrThrow();
+            MinecraftServer server = level.getServer();
+            RegistryAccess access = level.registryAccess();
+            return new DeliveryService(server, tag, access);
+        }, service -> {
+            ServerLevel level = context.levelOrThrow();
+            RegistryAccess access = level.registryAccess();
+            return service.save(access);
+        });
+    }, null);
 
     public static Optional<DeliveryService> get(MinecraftServer server)
     {
         ServerLevel level = server.getLevel(Level.OVERWORLD);
         if(level != null)
         {
-            return Optional.of(level.getDataStorage().computeIfAbsent(createFactory(server), STORAGE_ID));
+            return Optional.of(level.getDataStorage().computeIfAbsent(TYPE));
         }
         return Optional.empty();
-    }
-
-    public static Factory<DeliveryService> createFactory(MinecraftServer server)
-    {
-        return new Factory<>(() -> new DeliveryService(server), (tag, provider) -> new DeliveryService(server, tag, provider), DataFixTypes.SAVED_DATA_FORCED_CHUNKS);
     }
 
     private final MinecraftServer server;
@@ -85,14 +88,6 @@ public class DeliveryService extends SavedData
     public MinecraftServer getServer()
     {
         return this.server;
-    }
-
-    /**
-     * @return An unmodifiable view of the registered mailboxes
-     */
-    public Map<UUID, Mailbox> getMailboxes()
-    {
-        return Collections.unmodifiableMap(this.mailboxes);
     }
 
     /**
@@ -130,7 +125,7 @@ public class DeliveryService extends SavedData
             return DeliveryResult.createFail(Utils.translationKey("gui", "delivery_service.unknown_mailbox"));
 
         // Check if the queue is not full
-        if(mailbox.queue().size() >= Config.SERVER.mailQueueSize.get())
+        if(mailbox.queue().size() >= Config.SERVER.deliveryQueueSize.get())
             return DeliveryResult.createFail(Utils.translationKey("gui", "delivery_service.mailbox_queue_full"));
 
         // Check if mailbox is in a deliverable dimension
@@ -156,6 +151,21 @@ public class DeliveryService extends SavedData
     }
 
     /**
+     * Determines if the given player can create/place a mailbox. Mailboxes are limited per player,
+     * as specified by a maximum count in the config.
+     *
+     * @param player the player to test
+     * @return True if the player can place a mailbox
+     */
+    public boolean canCreateMailbox(Player player)
+    {
+        long count = this.mailboxes.values().stream()
+                .filter(box -> player.getUUID().equals(box.owner().getValue()))
+                .count();
+        return Config.SERVER.maxMailboxesPerPlayer.get() > count;
+    }
+
+    /**
      * Gets an existing or creates a new mailbox for the given mailbox block entity. This method is
      * responsible for registering mailboxes into the delivery system and is called when a player
      * placing a new mailbox block. The mailbox is initially unclaimed but is immediately claimed
@@ -166,6 +176,7 @@ public class DeliveryService extends SavedData
      */
     public Mailbox getOrCreateMailBox(MailboxBlockEntity blockEntity)
     {
+        this.duplicateIdCheck(blockEntity);
         return this.mailboxes.computeIfAbsent(blockEntity.getId(), uuid -> {
             ResourceKey<Level> levelKey = blockEntity.getLevel().dimension();
             BlockPos pos = blockEntity.getBlockPos();
@@ -174,6 +185,23 @@ public class DeliveryService extends SavedData
             this.setDirty();
             return mailbox;
         });
+    }
+
+    /**
+     * Regenerates the id of the mailbox block entity if another mailbox with that id already exists.
+     * A collision with a random UUID is very unlikely, however a player can pick a block with NBT
+     * and place down a mailbox with the same UUID. Naturally, regenerating the UUID won't affect
+     * the mailbox that already exists with the UUID that collided with the given blockEntity arg.
+     *
+     * @param blockEntity the mailbox block entity to check
+     */
+    private void duplicateIdCheck(MailboxBlockEntity blockEntity)
+    {
+        Mailbox box = this.mailboxes.get(blockEntity.getId());
+        if(box != null && !box.pos().equals(blockEntity.getBlockPos()))
+        {
+            blockEntity.regenerateId();
+        }
     }
 
     /**
@@ -228,12 +256,24 @@ public class DeliveryService extends SavedData
         }).orElse(false);
     }
 
+    public Collection<IMailbox> getMailboxes()
+    {
+        return Collections.unmodifiableCollection(this.mailboxes.values());
+    }
+
     /**
      * Encodes the mailboxes to a FriendlyByteBuf
      */
-    public PostBoxMenu.CustomData createPostBoxData()
+    public void encodeMailboxes(FriendlyByteBuf buf)
     {
-        return new PostBoxMenu.CustomData(List.copyOf(this.mailboxes.values()));
+        buf.writeCollection(this.mailboxes.values(), (buf1, mailbox) -> {
+            buf1.writeUUID(mailbox.getId());
+            buf1.writeOptional(mailbox.getOwner(), (buf2, profile) -> {
+                buf2.writeUUID(profile.getId());
+                buf2.writeOptional(Optional.ofNullable(profile.getName()), FriendlyByteBuf::writeUtf);
+            });
+            buf1.writeOptional(mailbox.getCustomName(), FriendlyByteBuf::writeUtf);
+        });
     }
 
     /**
@@ -245,7 +285,7 @@ public class DeliveryService extends SavedData
      */
     public static List<IMailbox> decodeMailboxes(FriendlyByteBuf buf)
     {
-        List<IMailbox> list = buf.readList(buf1 -> {
+        List<IMailbox> list = buf.<IMailbox>readList(buf1 -> {
             UUID mailboxId = buf1.readUUID();
             Optional<GameProfile> profile = buf1.readOptional(buf2 -> {
                 UUID playerId = buf2.readUUID();
@@ -260,28 +300,25 @@ public class DeliveryService extends SavedData
 
     private void load(CompoundTag compound, HolderLookup.Provider provider)
     {
-        if(compound.contains("Mailboxes", Tag.TAG_LIST))
+        if(compound.contains("Mailboxes"))
         {
-            ListTag list = compound.getList("Mailboxes", Tag.TAG_COMPOUND);
+            ListTag list = compound.getListOrEmpty("Mailboxes");
             list.forEach(tag ->
             {
+                if(!(tag instanceof CompoundTag mailboxTag))
+                    return;
+
                 try
                 {
-                    CompoundTag mailboxTag = (CompoundTag) tag;
-                    ResourceKey<Level> levelKey = createLevelKey(mailboxTag.getString("Level"));
-                    if(levelKey == null)
-{
-                        Constants.LOG.error("Failed to load a mailbox due to invalid dimension");
-                        return;
-                    }
-                    UUID id = mailboxTag.getUUID("UUID");
-                    BlockPos pos = BlockPos.of(mailboxTag.getLong("BlockPosition"));
+                    ResourceKey<Level> levelKey = createLevelKey(mailboxTag.getString("Level").orElseThrow());
+                    UUID id = mailboxTag.read("UUID", UUIDUtil.CODEC).orElseThrow();
+                    BlockPos pos = BlockPos.of(mailboxTag.getLong("BlockPosition").orElseThrow());
                     MutableObject<UUID> owner = new MutableObject<>();
-                    if(mailboxTag.contains("Owner", Tag.TAG_INT_ARRAY))
+                    if(mailboxTag.contains("Owner"))
                     {
-                        owner.setValue(mailboxTag.getUUID("Owner"));
+                        mailboxTag.read("Owner", UUIDUtil.CODEC).ifPresent(owner::setValue);
                     }
-                    String customName = mailboxTag.getString("CustomName");
+                    String customName = mailboxTag.getString("CustomName").orElse("Mailbox");
                     customName = customName.substring(0, Math.min(customName.length(), 32));
                     Queue<ItemStack> queue = Mailbox.readQueueListTag(mailboxTag, provider);
                     Mailbox mailbox = new Mailbox(id, levelKey, pos, owner, new MutableObject<>(customName), queue, new MutableBoolean(), this);
@@ -296,26 +333,26 @@ public class DeliveryService extends SavedData
         }
     }
 
-    @Override
-    public CompoundTag save(CompoundTag compound, HolderLookup.Provider provider)
+    public CompoundTag save(HolderLookup.Provider provider)
     {
+        CompoundTag tag = new CompoundTag();
         ListTag list = new ListTag();
         this.mailboxes.forEach((uuid, mailbox) ->
         {
             if(!mailbox.removed().booleanValue())
             {
                 CompoundTag mailboxTag = new CompoundTag();
-                mailboxTag.putUUID("UUID", uuid);
+                mailboxTag.store("UUID", UUIDUtil.CODEC, uuid);
                 mailboxTag.putString("Level", mailbox.levelKey().location().toString());
                 mailboxTag.putLong("BlockPosition", mailbox.pos().asLong());
-                Optional.ofNullable(mailbox.owner().getValue()).ifPresent(id -> mailboxTag.putUUID("Owner", id));
+                Optional.ofNullable(mailbox.owner().getValue()).ifPresent(id -> mailboxTag.store("Owner", UUIDUtil.CODEC, id));
                 Optional.ofNullable(mailbox.customName().getValue()).ifPresent(name -> mailboxTag.putString("CustomName", name));
                 mailbox.writeQueue(mailboxTag, provider);
                 list.add(mailboxTag);
             }
         });
-        compound.put("Mailboxes", list);
-        return compound;
+        tag.put("Mailboxes", list);
+        return tag;
     }
 
     /**
@@ -338,18 +375,29 @@ public class DeliveryService extends SavedData
     }
 
     /**
-     * Determines if the given player can create/place a mailbox. Mailboxes are limited per player,
-     * as specified by a maximum count in the config.
+     * Determines if the given ItemStack is an item that can't be sent through mail. By default,
+     * items that have inventory are banned (such as Shulker Boxes) unless explicitly disabled in
+     * mod's configuration. An item is also blocked if the item id is contained in the banned items
+     * list, which again is defined in the mod's configuration. Banned items are mainly to prevent
+     * creating large NBT on a single item, which can affect servers/world saves.
+     * <p>
+     * This method can only be called while in a game/server since it depends on a configuration
+     * sent from the server.
      *
-     * @param player the player to test
-     * @return True if the player can place a mailbox
+     * @param stack the ItemStack to check if it is banned
+     * @return True if the ItemStack is banned
      */
-    public boolean canCreateMailbox(Player player)
+    public static boolean isBannedItem(ItemStack stack)
     {
-        long count = this.mailboxes.values().stream()
-            .filter(box -> player.getUUID().equals(box.owner().getValue()))
-            .count();
-        return Config.SERVER.maxMailboxesPerPlayer.get() > count;
+        // Check if the item can fit inside container items
+        if(Config.SERVER.banSendingItemsWithInventories.get() && !stack.getItem().canFitInsideContainerItems())
+        {
+            return true;
+        }
+
+        // Check if the item is not on the banned item list
+        String name = stack.getItem().getDescriptionId();
+        return Config.SERVER.bannedItems.get().contains(name);
     }
 
     /**
