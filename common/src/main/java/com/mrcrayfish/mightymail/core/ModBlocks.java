@@ -138,6 +138,18 @@ public class ModBlocks
             MailboxItem::new,
             Item.Properties::new);
 
+    public static final RegistryEntry<MailboxBlock> MAIL_BOX_PALE_OAK = RegistryEntry.blockWithItem(
+            Utils.resource("pale_oak_mail_box"),
+            MailboxBlock::new,
+            () -> BlockBehaviour.Properties.of()
+                    .mapColor(Blocks.PALE_OAK_PLANKS.defaultMapColor())
+                    .instrument(NoteBlockInstrument.BASS)
+                    .strength(3.5F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava(),
+            MailboxItem::new,
+            Item.Properties::new);
+
     public static final RegistryEntry<PostBoxBlock> POST_BOX = RegistryEntry.blockWithItem(
             Utils.resource("post_box"),
             PostBoxBlock::new,

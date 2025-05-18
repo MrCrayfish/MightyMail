@@ -151,6 +151,10 @@ public class MigrateCommand
             {
                 newBlock = com.mrcrayfish.furniture.refurbished.core.ModBlocks.MAIL_BOX_WARPED.get();
             }
+            else if(state.getBlock() == ModBlocks.MAIL_BOX_PALE_OAK.get())
+            {
+                newBlock = com.mrcrayfish.furniture.refurbished.core.ModBlocks.MAIL_BOX_PALE_OAK.get();
+            }
             else
             {
                 continue;

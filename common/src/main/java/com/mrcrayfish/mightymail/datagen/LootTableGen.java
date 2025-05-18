@@ -46,6 +46,7 @@ public class LootTableGen extends LootTableProvider
             this.drop(consumer, ModBlocks.MAIL_BOX_CHERRY.get());
             this.drop(consumer, ModBlocks.MAIL_BOX_CRIMSON.get());
             this.drop(consumer, ModBlocks.MAIL_BOX_WARPED.get());
+            this.drop(consumer, ModBlocks.MAIL_BOX_PALE_OAK.get());
             this.drop(consumer, ModBlocks.POST_BOX.get());
         }
 

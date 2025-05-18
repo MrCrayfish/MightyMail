@@ -30,6 +30,7 @@ public class ClientHandler
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.MAIL_BOX_CHERRY.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.MAIL_BOX_CRIMSON.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.MAIL_BOX_WARPED.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.MAIL_BOX_PALE_OAK.get(), RenderType.cutout());
     }
 
     @SubscribeEvent

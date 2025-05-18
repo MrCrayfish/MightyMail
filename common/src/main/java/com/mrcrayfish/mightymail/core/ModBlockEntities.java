@@ -24,7 +24,8 @@ public class ModBlockEntities
             ModBlocks.MAIL_BOX_MANGROVE.get(),
             ModBlocks.MAIL_BOX_CHERRY.get(),
             ModBlocks.MAIL_BOX_CRIMSON.get(),
-            ModBlocks.MAIL_BOX_WARPED.get()
+            ModBlocks.MAIL_BOX_WARPED.get(),
+            ModBlocks.MAIL_BOX_PALE_OAK.get(),
     });
 
     public static final RegistryEntry<BlockEntityType<PostBoxBlockEntity>> POST_BOX = RegistryEntry.blockEntity(Utils.resource("post_box"), PostBoxBlockEntity::new, () -> new Block[]{

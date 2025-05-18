@@ -30,7 +30,8 @@ public class BlockTagGen extends IntrinsicHolderTagsProvider<Block>
                 .add(ModBlocks.MAIL_BOX_MANGROVE.get())
                 .add(ModBlocks.MAIL_BOX_CHERRY.get())
                 .add(ModBlocks.MAIL_BOX_CRIMSON.get())
-                .add(ModBlocks.MAIL_BOX_WARPED.get());
+                .add(ModBlocks.MAIL_BOX_WARPED.get())
+                .add(ModBlocks.MAIL_BOX_PALE_OAK.get());
 
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
                 .add(ModBlocks.POST_BOX.get());

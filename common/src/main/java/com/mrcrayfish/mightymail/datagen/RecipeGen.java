@@ -36,6 +36,7 @@ public class RecipeGen extends RecipeProvider
         this.mailbox(ModBlocks.MAIL_BOX_CHERRY.get(), Blocks.CHERRY_PLANKS, Blocks.CHERRY_FENCE);
         this.mailbox(ModBlocks.MAIL_BOX_CRIMSON.get(), Blocks.CRIMSON_PLANKS, Blocks.CRIMSON_FENCE);
         this.mailbox(ModBlocks.MAIL_BOX_WARPED.get(), Blocks.WARPED_PLANKS, Blocks.WARPED_FENCE);
+        this.mailbox(ModBlocks.MAIL_BOX_PALE_OAK.get(), Blocks.PALE_OAK_PLANKS, Blocks.PALE_OAK_FENCE);
 
         shaped(RecipeCategory.DECORATIONS, ModBlocks.POST_BOX.get())
             .pattern("III")

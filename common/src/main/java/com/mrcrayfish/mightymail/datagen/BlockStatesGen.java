@@ -45,6 +45,7 @@ public class BlockStatesGen extends FrameworkGenerator
         this.mailbox(ModBlocks.MAIL_BOX_CHERRY.get(), WoodType.CHERRY);
         this.mailbox(ModBlocks.MAIL_BOX_CRIMSON.get(), WoodType.CRIMSON);
         this.mailbox(ModBlocks.MAIL_BOX_WARPED.get(), WoodType.WARPED);
+        this.mailbox(ModBlocks.MAIL_BOX_PALE_OAK.get(), WoodType.PALE_OAK);
         this.postBox(ModBlocks.POST_BOX.get());
     }
 
