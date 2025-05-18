@@ -26,7 +26,7 @@ public class ClientPlayHandler
         Minecraft mc = Minecraft.getInstance();
         if(mc.screen instanceof PostBoxScreen postBox)
         {
-            postBox.showResponse(message.getResult());
+            postBox.showResponse(message.result());
         }
     }
 }

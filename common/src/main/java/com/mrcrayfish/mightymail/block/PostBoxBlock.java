@@ -2,6 +2,7 @@ package com.mrcrayfish.mightymail.block;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.mojang.serialization.MapCodec;
 import com.mrcrayfish.framework.api.FrameworkAPI;
 import com.mrcrayfish.mightymail.blockentity.PostBoxBlockEntity;
 import com.mrcrayfish.mightymail.mail.DeliveryService;
@@ -10,11 +11,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -39,6 +37,8 @@ import java.util.stream.Collectors;
  */
 public class PostBoxBlock extends RotatedBlock implements EntityBlock
 {
+    private static final MapCodec<PostBoxBlock> CODEC = simpleCodec(PostBoxBlock::new);
+
     private final Map<BlockState, VoxelShape> shapes;
 
     public PostBoxBlock(Properties properties)
@@ -46,6 +46,12 @@ public class PostBoxBlock extends RotatedBlock implements EntityBlock
         super(properties);
         this.registerDefaultState(this.getStateDefinition().any().setValue(DIRECTION, Direction.NORTH));
         this.shapes = this.generateShapes();
+    }
+
+    @Override
+    protected MapCodec<PostBoxBlock> codec()
+    {
+        return CODEC;
     }
 
     protected Map<BlockState, VoxelShape> generateShapes()
@@ -98,14 +104,12 @@ public class PostBoxBlock extends RotatedBlock implements EntityBlock
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result)
+    public InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult result)
     {
         if(!level.isClientSide() && level.getBlockEntity(pos) instanceof PostBoxBlockEntity postBox)
         {
-            FrameworkAPI.openMenuWithData((ServerPlayer) player, postBox, buf -> {
-                DeliveryService.get(((ServerLevel) level).getServer()).ifPresent(service -> {
-                    service.encodeMailboxes(buf);
-                });
+            DeliveryService.get(((ServerLevel) level).getServer()).ifPresent(service -> {
+                FrameworkAPI.openMenuWithData((ServerPlayer) player, postBox, service.createPostBoxData());
             });
             return InteractionResult.CONSUME;
         }

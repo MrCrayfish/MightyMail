@@ -10,15 +10,12 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.phys.shapes.VoxelShape;
-
-import java.util.Map;
 
 public abstract class RotatedBlock extends BaseEntityBlock
 {
     public static final DirectionProperty DIRECTION = BlockStateProperties.HORIZONTAL_FACING;
 
-    public RotatedBlock(BlockBehaviour.Properties properties)
+    public RotatedBlock(Properties properties)
     {
         super(properties);
     }

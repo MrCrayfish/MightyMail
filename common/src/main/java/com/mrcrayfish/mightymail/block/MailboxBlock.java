@@ -2,6 +2,7 @@ package com.mrcrayfish.mightymail.block;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.mojang.serialization.MapCodec;
 import com.mrcrayfish.mightymail.blockentity.MailboxBlockEntity;
 import com.mrcrayfish.mightymail.client.ScreenHooks;
 import com.mrcrayfish.mightymail.mail.DeliveryService;
@@ -12,7 +13,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Containers;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -44,6 +44,8 @@ import java.util.stream.Collectors;
  */
 public class MailboxBlock extends RotatedBlock implements EntityBlock
 {
+    private static final MapCodec<MailboxBlock> CODEC = simpleCodec(MailboxBlock::new);
+
     public static final BooleanProperty ENABLED = BlockStateProperties.ENABLED;
 
     private final Map<BlockState, VoxelShape> shapes;
@@ -53,6 +55,12 @@ public class MailboxBlock extends RotatedBlock implements EntityBlock
         super(properties);
         this.registerDefaultState(this.getStateDefinition().any().setValue(DIRECTION, Direction.NORTH).setValue(ENABLED, false));
         this.shapes = this.generateShapes();
+    }
+
+    @Override
+    protected MapCodec<MailboxBlock> codec()
+    {
+        return CODEC;
     }
 
     protected Map<BlockState, VoxelShape> generateShapes()
@@ -126,7 +134,7 @@ public class MailboxBlock extends RotatedBlock implements EntityBlock
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result)
+    public InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult result)
     {
         if(!level.isClientSide() && level.getBlockEntity(pos) instanceof MailboxBlockEntity blockEntity)
         {

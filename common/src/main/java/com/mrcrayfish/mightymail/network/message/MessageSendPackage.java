@@ -1,56 +1,33 @@
 package com.mrcrayfish.mightymail.network.message;
 
 import com.mrcrayfish.framework.api.network.MessageContext;
-import com.mrcrayfish.framework.api.network.message.PlayMessage;
 import com.mrcrayfish.mightymail.network.play.ServerPlayHandler;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.UUID;
 
 /**
  * Author: MrCrayfish
  */
-public class MessageSendPackage extends PlayMessage<MessageSendPackage>
+public record MessageSendPackage(UUID mailboxId, String message)
 {
-    private UUID mailboxId;
-    private String message;
+    public static final StreamCodec<RegistryFriendlyByteBuf, MessageSendPackage> STREAM_CODEC = StreamCodec.of((buf, message) -> {
+        buf.writeUUID(message.mailboxId);
+        buf.writeUtf(message.message);
+    }, buf -> {
+        return new MessageSendPackage(buf.readUUID(), buf.readUtf());
+    });
 
-    public MessageSendPackage() {}
-
-    public MessageSendPackage(UUID mailboxId, String message)
+    public static void handle(MessageSendPackage message, MessageContext context)
     {
-        this.mailboxId = mailboxId;
-        this.message = message;
-    }
-
-    @Override
-    public void encode(MessageSendPackage message, FriendlyByteBuf buffer)
-    {
-        buffer.writeUUID(message.mailboxId);
-        buffer.writeUtf(message.message);
-    }
-
-    @Override
-    public MessageSendPackage decode(FriendlyByteBuf buffer)
-    {
-        return new MessageSendPackage(buffer.readUUID(), buffer.readUtf());
-    }
-
-    @Override
-    public void handle(MessageSendPackage message, MessageContext context)
-    {
-        context.execute(() -> ServerPlayHandler.handleMessageSendPackage(message, context.getPlayer(), context));
+        context.execute(() -> ServerPlayHandler.handleMessageSendPackage(message, context.getPlayer().orElse(null), context));
         context.setHandled(true);
     }
 
-    public UUID getMailboxId()
-    {
-        return this.mailboxId;
-    }
-
     @Nullable
-    public String getMessage()
+    public String message()
     {
         return !this.message.isBlank() ? this.message : null;
     }

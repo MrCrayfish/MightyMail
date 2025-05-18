@@ -1,26 +1,18 @@
 package com.mrcrayfish.mightymail.network.message;
 
 import com.mrcrayfish.framework.api.network.MessageContext;
-import com.mrcrayfish.framework.api.network.message.PlayMessage;
 import com.mrcrayfish.mightymail.network.play.ClientPlayHandler;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 
 /**
  * Author: MrCrayfish
  */
-public class MessageClearMessage extends PlayMessage<MessageClearMessage>
+public record MessageClearMessage()
 {
-    @Override
-    public void encode(MessageClearMessage message, FriendlyByteBuf buffer) {}
+    public static final StreamCodec<RegistryFriendlyByteBuf, MessageClearMessage> STREAM_CODEC = StreamCodec.unit(new MessageClearMessage());
 
-    @Override
-    public MessageClearMessage decode(FriendlyByteBuf buffer)
-    {
-        return new MessageClearMessage();
-    }
-
-    @Override
-    public void handle(MessageClearMessage message, MessageContext context)
+    public static void handle(MessageClearMessage message, MessageContext context)
     {
         context.execute(() -> ClientPlayHandler.handleMessageClearMessage(message));
         context.setHandled(true);

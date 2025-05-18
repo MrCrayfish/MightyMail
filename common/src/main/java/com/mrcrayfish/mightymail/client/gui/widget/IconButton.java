@@ -3,8 +3,6 @@ package com.mrcrayfish.mightymail.client.gui.widget;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipPositioner;
-import net.minecraft.client.gui.screens.inventory.tooltip.DefaultTooltipPositioner;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.resources.ResourceLocation;
 
@@ -49,9 +47,9 @@ public class IconButton extends Button
         graphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
     }
 
-    @Override
+    /*@Override
     protected ClientTooltipPositioner createTooltipPositioner()
     {
         return DefaultTooltipPositioner.INSTANCE;
-    }
+    }*/
 }

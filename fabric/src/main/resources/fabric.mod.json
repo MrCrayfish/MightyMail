@@ -20,6 +20,9 @@
         ],
         "client": [
             "com.mrcrayfish.mightymail.client.ClientHandler"
+        ],
+        "fabric-datagen": [
+            "com.mrcrayfish.mightymail.DataGeneration"
         ]
     },
     "depends": {

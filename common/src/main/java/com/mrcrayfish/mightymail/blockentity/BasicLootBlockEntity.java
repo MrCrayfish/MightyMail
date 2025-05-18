@@ -2,6 +2,7 @@ package com.mrcrayfish.mightymail.blockentity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.ContainerHelper;
@@ -11,8 +12,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.stream.IntStream;
 
 /**
@@ -53,23 +54,23 @@ public abstract class BasicLootBlockEntity extends RandomizableContainerBlockEnt
     }
 
     @Override
-    protected void saveAdditional(CompoundTag tag)
+    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider provider)
     {
-        super.saveAdditional(tag);
+        super.saveAdditional(tag, provider);
         if(!this.trySaveLootTable(tag))
         {
-            ContainerHelper.saveAllItems(tag, this.items);
+            ContainerHelper.saveAllItems(tag, this.items, provider);
         }
     }
 
     @Override
-    public void load(CompoundTag compound)
+    public void loadAdditional(CompoundTag tag, HolderLookup.Provider provider)
     {
-        super.load(compound);
+        super.loadAdditional(tag, provider);
         this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-        if(!this.tryLoadLootTable(compound))
+        if(!this.tryLoadLootTable(tag))
         {
-            ContainerHelper.loadAllItems(compound, this.items);
+            ContainerHelper.loadAllItems(tag, this.items, provider);
         }
     }
 

@@ -7,6 +7,7 @@ import com.mrcrayfish.mightymail.mail.DeliveryService;
 import com.mrcrayfish.mightymail.mail.Mailbox;
 import com.mrcrayfish.mightymail.util.Utils;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
@@ -56,7 +57,7 @@ public class MailboxBlockEntity extends BasicLootBlockEntity
             {
                 continue;
             }
-            if(ItemStack.isSameItemSameTags(stack, mail) && stack.getCount() + mail.getCount() <= stack.getMaxStackSize())
+            if(ItemStack.isSameItemSameComponents(stack, mail) && stack.getCount() + mail.getCount() <= stack.getMaxStackSize())
             {
                 stack.grow(mail.getCount());
                 this.setChanged();
@@ -147,9 +148,9 @@ public class MailboxBlockEntity extends BasicLootBlockEntity
     }
 
     @Override
-    public void load(CompoundTag tag)
+    public void loadAdditional(CompoundTag tag, HolderLookup.Provider provider)
     {
-        super.load(tag);
+        super.loadAdditional(tag, provider);
         if(tag.contains("UUID", Tag.TAG_INT_ARRAY))
         {
             this.uuid = tag.getUUID("UUID");
@@ -157,9 +158,9 @@ public class MailboxBlockEntity extends BasicLootBlockEntity
     }
 
     @Override
-    protected void saveAdditional(CompoundTag tag)
+    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider provider)
     {
-        super.saveAdditional(tag);
+        super.saveAdditional(tag, provider);
         tag.putUUID("UUID", this.uuid);
     }
 }

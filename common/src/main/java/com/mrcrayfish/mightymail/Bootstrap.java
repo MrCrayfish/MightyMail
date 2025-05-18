@@ -30,10 +30,10 @@ public class Bootstrap
             }
         });
         DispenserBlock.registerBehavior(ModItems.PACKAGE::get, (source, stack) -> {
-            Direction direction = source.getBlockState().getValue(DispenserBlock.FACING);
-            Vec3 pos = source.getPos().relative(direction).getCenter();
-            PackageItem.getPackagedItems(stack).forEach(s -> {
-                Containers.dropItemStack(source.getLevel(), pos.x, pos.y, pos.z, s);
+            Direction direction = source.state().getValue(DispenserBlock.FACING);
+            Vec3 pos = source.pos().relative(direction).getCenter();
+            PackageItem.getPackagedItems(stack).stream().forEach(s -> {
+                Containers.dropItemStack(source.level(), pos.x, pos.y, pos.z, s);
             });
             return ItemStack.EMPTY;
         });
