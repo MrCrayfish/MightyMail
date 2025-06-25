@@ -3,9 +3,11 @@ package com.mrcrayfish.mightymail.client.gui.widget;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.ARGB;
 
 /**
  * Author: MrCrayfish
@@ -41,9 +43,8 @@ public class IconButton extends Button
         int iconX = this.getX() + contentLeft;
         int iconY = this.getY() + contentTop;
         float brightness = this.active ? 1.0F : 0.5F;
-        RenderSystem.setShaderColor(brightness, brightness, brightness, this.alpha);
-        graphics.blit(RenderType::guiTextured, this.texture, iconX, iconY, this.iconU, this.iconV, 10, 10, this.sourceWidth, this.sourceHeight);
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+        int color = ARGB.colorFromFloat(this.alpha, brightness, brightness, brightness);
+        graphics.blit(RenderPipelines.GUI_TEXTURED, this.texture, iconX, iconY, this.iconU, this.iconV, 10, 10, this.sourceWidth, this.sourceHeight, color);
     }
 
     /*@Override

@@ -103,11 +103,14 @@ public class MailboxBlock extends RotatedBlock implements EntityBlock
         {
             if(!level.isClientSide())
             {
-                if(level.getBlockEntity(pos) instanceof MailboxBlockEntity mailbox)
+                if(level.getBlockEntity(pos) instanceof MailboxBlockEntity blockEntity)
                 {
-                    mailbox.getMailbox().owner().setValue(player.getUUID());
                     DeliveryService.get(((ServerLevel) level).getServer()).ifPresent(service -> {
-                        service.markMailboxAsPendingName(player, level, pos);
+                        Optional<Mailbox> mailboxOptional = blockEntity.getMailbox();
+                        mailboxOptional.ifPresent(mailbox -> {
+                            mailbox.setOwner(player.getUUID());
+                            service.markMailboxAsPendingName(player, level, pos);
+                        });
                     });
                 }
             }
@@ -136,11 +139,12 @@ public class MailboxBlock extends RotatedBlock implements EntityBlock
             }
             
             // Claim the mailbox if the mailbox is not owned.
-            Mailbox mailbox = blockEntity.getMailbox();
-            if(mailbox != null && !mailbox.hasOwner())
-            {
-                mailbox.setOwner(player.getUUID());
-            }
+            Optional<Mailbox> optionalMailbox = blockEntity.getMailbox();
+            optionalMailbox.ifPresent(mailbox -> {
+                if(!mailbox.hasOwner()) {
+                    mailbox.setOwner(player.getUUID());
+                }
+            });
 
             player.openMenu(blockEntity);
             return InteractionResult.CONSUME;

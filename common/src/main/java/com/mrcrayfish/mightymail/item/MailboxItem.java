@@ -26,7 +26,7 @@ public class MailboxItem extends BlockItem
     {
         if(context.getPlayer() instanceof ServerPlayer player)
         {
-            DeliveryService service = DeliveryService.get(player.server).orElse(null);
+            DeliveryService service = DeliveryService.get(player.level().getServer()).orElse(null);
             if(service != null)
             {
                 if(!service.canCreateMailbox(player))

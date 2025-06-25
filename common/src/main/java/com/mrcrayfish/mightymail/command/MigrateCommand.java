@@ -172,9 +172,11 @@ public class MigrateCommand
             newBlockEntity.regenerateId();
 
             // Update the details of the new mailbox to match the old name and owner
-            com.mrcrayfish.furniture.refurbished.mail.Mailbox newMailbox = newBlockEntity.getMailbox();
-            newMailbox.customName().setValue(mailbox.customName().getValue());
-            newMailbox.setOwner(mailbox.owner().getValue());
+            newBlockEntity.getMailbox().ifPresent(mailbox1 -> {
+                mailbox.customName().ifPresent(mailbox1::rename);
+                mailbox.owner().ifPresent(mailbox1::setOwner);
+            });
+
 
             // Count
             counter.incrementAndGet();

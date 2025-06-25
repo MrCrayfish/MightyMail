@@ -6,6 +6,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -66,7 +67,7 @@ public class TextInputScreen extends Screen
         this.addRenderableWidget(this.editBox = new EditBox(this.minecraft.font, startX + 6, startY + 20, WINDOW_WIDTH - 12, 20, this.hint));
         this.editBox.setResponder(s -> {
             boolean valid = this.validator.apply(s);
-            this.editBox.setTextColor(valid ? 0xFFFFFF : 0xFF0000);
+            this.editBox.setTextColor(valid ? 0xFFFFFFFF : 0xFFFF0000);
             this.acceptButton.active = valid;
             this.input = s;
         });
@@ -90,7 +91,7 @@ public class TextInputScreen extends Screen
         super.renderBackground(graphics, mouseX, mouseY, partialTick);
         int startX = (this.width - WINDOW_WIDTH) / 2;
         int startY = (this.height - WINDOW_HEIGHT) / 2;
-        graphics.blitSprite(RenderType::guiTextured, WINDOW_SPRITE, startX, startY, WINDOW_WIDTH, WINDOW_HEIGHT);
+        graphics.blitSprite(RenderPipelines.GUI_TEXTURED, WINDOW_SPRITE, startX, startY, WINDOW_WIDTH, WINDOW_HEIGHT);
     }
 
     @Override
@@ -99,6 +100,6 @@ public class TextInputScreen extends Screen
         super.render(graphics, mouseX, mouseY, partialTick);
         int startX = (this.width - WINDOW_WIDTH) / 2;
         int startY = (this.height - WINDOW_HEIGHT) / 2;
-        graphics.drawString(this.minecraft.font, this.title, startX + 6, startY + 7, 0x404040, false);
+        graphics.drawString(this.minecraft.font, this.title, startX + 6, startY + 7, 0xFF404040, false);
     }
 }

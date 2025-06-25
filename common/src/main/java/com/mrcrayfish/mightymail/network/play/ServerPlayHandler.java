@@ -30,7 +30,7 @@ public class ServerPlayHandler
         if(!(player instanceof ServerPlayer serverPlayer))
             return;
 
-        DeliveryService.get(serverPlayer.server).ifPresent(service -> {
+        DeliveryService.get(serverPlayer.level().getServer()).ifPresent(service -> {
             if(!service.renameMailbox(player, player.level(), message.pos(), message.name())) {
                 ((ServerPlayer) player).sendSystemMessage(Utils.translation("gui", "rename_mailbox_failed"));
             }
@@ -55,7 +55,7 @@ public class ServerPlayHandler
                 }
             }
 
-            DeliveryService.get(serverPlayer.server).ifPresent(service -> {
+            DeliveryService.get(serverPlayer.level().getServer()).ifPresent(service -> {
                 ItemStack stack = PackageItem.create(container, message.message(), player.getGameProfile().getName());
                 DeliveryResult result = service.sendMail(message.mailboxId(), stack);
                 if(result.success()) {
