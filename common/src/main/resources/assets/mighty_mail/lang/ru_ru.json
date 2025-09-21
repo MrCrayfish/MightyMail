@@ -36,5 +36,5 @@
     "gui.mighty_mail.delivery_service.mailbox_queue_full": "Выбранный почтовый ящик достиг максимальной очереди почты",
     "gui.mighty_mail.delivery_service.undeliverable_dimension": "Выбранный почтовый ящик находится в измерении недоставки",
     "gui.mighty_mail.delivery_service.package_sent": "Посылка отправлена!",
-    "subtitle.mighty_mail.package_open": "Открытие посылки"
+    "subtitle.mighty_mail.package_open": "Посылка открывается"
 }
