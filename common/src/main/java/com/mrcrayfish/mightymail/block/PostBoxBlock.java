@@ -71,7 +71,7 @@ public class PostBoxBlock extends RotatedBlock implements EntityBlock
     }
 
     @Override
-    public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos)
+    public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos, Direction direction)
     {
         return AbstractContainerMenu.getRedstoneSignalFromBlockEntity(level.getBlockEntity(pos));
     }

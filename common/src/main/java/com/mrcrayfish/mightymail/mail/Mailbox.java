@@ -1,20 +1,16 @@
 package com.mrcrayfish.mightymail.mail;
 
-import com.mojang.authlib.GameProfile;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.mrcrayfish.mightymail.blockentity.MailboxBlockEntity;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.core.UUIDUtil;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.players.GameProfileCache;
+import net.minecraft.server.players.NameAndId;
 import net.minecraft.world.Containers;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -200,16 +196,12 @@ public final class Mailbox implements IMailbox
     }
 
     @Override
-    public Optional<GameProfile> getOwner()
+    public Optional<NameAndId> getOwner()
     {
         UUID ownerId = this.owner.orElse(null);
         if(ownerId != null)
         {
-            GameProfileCache cache = this.service.getServer().getProfileCache();
-            if(cache != null)
-            {
-                return cache.get(ownerId);
-            }
+            return this.service.getServer().services().nameToIdCache().get(ownerId);
         }
         return Optional.empty();
     }

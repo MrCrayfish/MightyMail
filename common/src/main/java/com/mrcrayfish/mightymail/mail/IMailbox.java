@@ -1,6 +1,6 @@
 package com.mrcrayfish.mightymail.mail;
 
-import com.mojang.authlib.GameProfile;
+import net.minecraft.server.players.NameAndId;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -12,7 +12,7 @@ public interface IMailbox
 {
     UUID getId();
 
-    Optional<GameProfile> getOwner();
+    Optional<NameAndId> getOwner();
 
     Optional<String> getCustomName();
 }

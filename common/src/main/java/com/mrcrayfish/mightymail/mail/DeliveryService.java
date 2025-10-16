@@ -275,43 +275,6 @@ public class DeliveryService extends SavedData
     }
 
     /**
-     * Encodes the mailboxes to a FriendlyByteBuf
-     */
-    public void encodeMailboxes(FriendlyByteBuf buf)
-    {
-        buf.writeCollection(this.mailboxes.values(), (buf1, mailbox) -> {
-            buf1.writeUUID(mailbox.getId());
-            buf1.writeOptional(mailbox.getOwner(), (buf2, profile) -> {
-                buf2.writeUUID(profile.getId());
-                buf2.writeOptional(Optional.ofNullable(profile.getName()), FriendlyByteBuf::writeUtf);
-            });
-            buf1.writeOptional(mailbox.getCustomName(), FriendlyByteBuf::writeUtf);
-        });
-    }
-
-    /**
-     * Decodes the mailboxes from a FriendlyByteBuf. The list returned is immutable and the mailboxes
-     * are simply a read only view of the mailboxes from the server.
-     *
-     * @param buf the FriendlyByteBuf to read from
-     * @return an immutable list of mailboxes
-     */
-    public static List<IMailbox> decodeMailboxes(FriendlyByteBuf buf)
-    {
-        List<IMailbox> list = buf.<IMailbox>readList(buf1 -> {
-            UUID mailboxId = buf1.readUUID();
-            Optional<GameProfile> profile = buf1.readOptional(buf2 -> {
-                UUID playerId = buf2.readUUID();
-                Optional<String> name = buf2.readOptional(FriendlyByteBuf::readUtf);
-                return new GameProfile(playerId, name.orElse("Unknown"));
-            });
-            Optional<String> mailboxName = buf1.readOptional(FriendlyByteBuf::readUtf);
-            return new ClientMailbox(mailboxId, profile, mailboxName);
-        });
-        return ImmutableList.copyOf(list);
-    }
-
-    /**
      * Creates a ResourceKey for a level with the given key. This method checks for vanilla keys
      * since a reference for them already exists.
      *

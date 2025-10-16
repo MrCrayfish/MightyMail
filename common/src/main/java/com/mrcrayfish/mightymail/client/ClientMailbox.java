@@ -8,6 +8,7 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.Utf8String;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.server.players.NameAndId;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -15,21 +16,21 @@ import java.util.UUID;
 /**
  * Author: MrCrayfish
  */
-public record ClientMailbox(UUID id, Optional<GameProfile> owner, Optional<String> customName) implements IMailbox
+public record ClientMailbox(UUID id, Optional<NameAndId> owner, Optional<String> customName) implements IMailbox
 {
-    public static final StreamCodec<FriendlyByteBuf, GameProfile> GAME_PROFILE_NO_PROPERTIES = StreamCodec.of((buf, profile) -> {
-        UUIDUtil.STREAM_CODEC.encode(buf, profile.getId());
-        Utf8String.write(buf, profile.getName(), 16);
+    public static final StreamCodec<FriendlyByteBuf, NameAndId> NAME_AND_ID = StreamCodec.of((buf, nameAndId) -> {
+        buf.writeUUID(nameAndId.id());
+        buf.writeUtf(nameAndId.name());
     }, buf -> {
-        UUID id = UUIDUtil.STREAM_CODEC.decode(buf);
-        String name = Utf8String.read(buf, 16);
-        return new GameProfile(id, name);
+        UUID id = buf.readUUID();
+        String name = buf.readUtf();
+        return new NameAndId(id, name);
     });
 
     public static final StreamCodec<RegistryFriendlyByteBuf, IMailbox> STREAM_CODEC = StreamCodec.composite(
         UUIDUtil.STREAM_CODEC,
         IMailbox::getId,
-        ByteBufCodecs.optional(GAME_PROFILE_NO_PROPERTIES),
+        ByteBufCodecs.optional(NAME_AND_ID),
         IMailbox::getOwner,
         ByteBufCodecs.optional(ByteBufCodecs.stringUtf8(256)),
         IMailbox::getCustomName,
@@ -43,7 +44,7 @@ public record ClientMailbox(UUID id, Optional<GameProfile> owner, Optional<Strin
     }
 
     @Override
-    public Optional<GameProfile> getOwner()
+    public Optional<NameAndId> getOwner()
     {
         return this.owner;
     }
